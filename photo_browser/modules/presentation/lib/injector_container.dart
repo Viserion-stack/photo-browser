@@ -43,6 +43,7 @@ Future<void> init({
     ..registerFactoryParam<DashboardHomeBloc, DashboardHomeArgument, void>(
       (argument, _) => DashboardHomeBloc(
         argument: argument,
+        getUserUsecase: injector.get(),
       ),
     )
     ..registerFactoryParam<DashboardProfileBloc, DashboardProfileArgument, void>(

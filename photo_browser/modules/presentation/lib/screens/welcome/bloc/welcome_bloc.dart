@@ -30,7 +30,7 @@ class WelcomeBloc extends Bloc<WelcomeEvent, WelcomeState> {
   Future<void> _onLoggedIn(_OnLoggedIn event, Emitter<WelcomeState> emit) async {
     emit(state.copyWith(type: StateType.loading));
 
-    const user = User(name: 'name', email: 'email');
+    final  user = User.initial();
     final newState = await _userProvider
         .updateUser(user)
         .match(

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:presentation/screens/dashboard_home/bloc/dashboard_home_bloc.dart';
 
 class DashboardHomeScreen extends StatelessWidget {
   static const routeName = '/dashboard-home';
@@ -7,13 +9,22 @@ class DashboardHomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(),
-      body: const  Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children:  [
-            Text('Home'),
-          ],
-        ),
+      body: BlocBuilder<DashboardHomeBloc, DashboardHomeState>(
+        builder: (context, state) {
+          return Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Text('Home'),
+                ElevatedButton(
+                  onPressed: () => context.read<DashboardHomeBloc>().add(const DashboardHomeEvent.photosFetched()),
+                  child: const Text('Get photo'),
+                ),
+                Text(state.user[0].description ?? 'null'),
+              ],
+            ),
+          );
+        },
       ),
     );
   }

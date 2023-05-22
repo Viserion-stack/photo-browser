@@ -37,8 +37,9 @@ class DioProvider {
         if (token.isNotEmpty) {
           options.headers.addAll(
             {
-              'Authorization': 'Bearer $token',
+              //'Authorization': 'Bearer ',
               'Content-Type': 'application/json',
+              
             },
           );
         }

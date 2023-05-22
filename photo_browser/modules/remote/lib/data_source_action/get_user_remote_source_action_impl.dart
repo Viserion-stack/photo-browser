@@ -12,21 +12,21 @@ class GetUserRemoteSourceActionImpl implements GetUserRemoteSourceAction {
   const GetUserRemoteSourceActionImpl({
     required UserRestApi userRestApi,
     required ErrorConverter errorConverter,
-    required Mapper<UserRemoteModel, User> userRemoteToUserMapper,
+    required Mapper<List<UserRemoteModel>, List<User>> userRemoteToUserMapper,
   })  : _userRestApi = userRestApi,
         _errorConverter = errorConverter,
         _userRemoteToUserMapper = userRemoteToUserMapper;
 
   final UserRestApi _userRestApi;
   final ErrorConverter _errorConverter;
-  final Mapper<UserRemoteModel, User> _userRemoteToUserMapper;
+  final Mapper<List<UserRemoteModel>, List<User>> _userRemoteToUserMapper;
 
   @override
-  TaskEither<ErrorDetail, User> execute() {
-    return tryCatchE<ErrorDetail, User>(
+  TaskEither<ErrorDetail, List<User>> execute() {
+    return tryCatchE<ErrorDetail, List<User>>(
       () async {
-        final response = await _userRestApi.getCurrentUser();
-        return right(_userRemoteToUserMapper.map(response));
+        final response = await _userRestApi.getPhotos();
+        return right(_userRemoteToUserMapper.map(response ) );
       },
       _errorConverter.handleRemoteError,
     );

@@ -1,5 +1,7 @@
 import 'dart:async';
 
+import 'package:domain/model/user.dart';
+import 'package:domain/usecase/get_user_usecase.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:presentation/common/state_type.dart';
@@ -14,9 +16,20 @@ part 'dashboard_home_state.dart';
 class DashboardHomeBloc extends Bloc<DashboardHomeEvent, DashboardHomeState> {
   DashboardHomeBloc({
     required DashboardHomeArgument argument,
-  }) : super(DashboardHomeState.initial(argument: argument)) {
+    required GetUserUsecase getUserUsecase,
+  }) :_getUserUsecase = getUserUsecase,
+   super(DashboardHomeState.initial(argument: argument)) {
     on<_OnInitiated>(_onInitiated);
+    on<_PhotosFetched>(_onPhotoFetched);
   }
 
+  final GetUserUsecase _getUserUsecase;
+
   Future<void> _onInitiated(_OnInitiated event, Emitter<DashboardHomeState> emit) async {}
+
+  Future<void> _onPhotoFetched(_PhotosFetched event, Emitter<DashboardHomeState> emit) async {
+    final result = await _getUserUsecase.execute().match((l) => state.copyWith(user: state.user), (r) => state.copyWith(user: r,),).run();
+
+    emit(result);
+  }
 }

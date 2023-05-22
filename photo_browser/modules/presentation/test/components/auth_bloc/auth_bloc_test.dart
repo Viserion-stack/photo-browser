@@ -23,8 +23,9 @@ void main() {
   late AuthBloc bloc;
 
   const user = User(
-    name: 'name',
-    email: 'email',
+    description: 'dsd',
+    id: 'dsadsa',
+    urls: [],
   );
 
   setUp(

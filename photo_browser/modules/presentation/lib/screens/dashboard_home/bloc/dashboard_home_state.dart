@@ -5,12 +5,14 @@ class DashboardHomeState with _$DashboardHomeState {
   const factory DashboardHomeState({
     required StateType type,
     required DashboardHomeArgument argument,
+    required List<User> user,
   }) = _DashboardHomeState;
 
   factory DashboardHomeState.initial({required DashboardHomeArgument argument}) {
     return DashboardHomeState(
       type: StateType.loading,
       argument: argument,
+      user: [User.initial()],
     );
   }
 }

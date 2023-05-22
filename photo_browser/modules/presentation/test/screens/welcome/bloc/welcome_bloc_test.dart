@@ -16,10 +16,7 @@ void main() {
   late WelcomeBloc bloc;
 
   const argument = WelcomeArgument();
-  const user = User(
-    name: 'name',
-    email: 'email',
-  );
+  final user = User.initial();
 
   setUp(
     () {
