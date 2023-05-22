@@ -1,0 +1,14 @@
+for_platform :ios do
+    team_id ENV['TEAM_ID']
+    for_lane :build_fad_ios_alpha do
+        app_identifier 'com.photos.alpha'
+    end
+
+    for_lane :build_fad_ios_beta do
+        app_identifier 'com.photos.beta'
+    end
+
+    for_lane :build_ios_production do
+        app_identifier 'com.photos'
+    end
+end
