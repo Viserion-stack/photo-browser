@@ -143,7 +143,7 @@ void main() {
       bloc
         // ignore: avoid_redundant_argument_values
         ..add(const PaginationEvent.loadFirstPage(pageSize: 10, filteringKey: null, config: null))
-        ..add(const PaginationEvent.loadNextPage(pageSize: 10));
+        ..add(const PaginationEvent.loadNextPage());
     },
     expect: () => [
       isA<PaginationLoadedState<PaginationItem>>().having((it) => it.isLoading, 'isLoading', true),
