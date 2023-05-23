@@ -7,6 +7,7 @@ import 'package:domain/store/adapter/shared_preferences_adapter.dart';
 import 'package:domain/store/single_value_store.dart';
 import 'package:domain/usecase/delete_local_user_usecase.dart';
 import 'package:domain/usecase/get_local_user_usecase.dart';
+import 'package:domain/usecase/get_photo_usecase.dart';
 import 'package:domain/usecase/get_user_usecase.dart';
 import 'package:domain/usecase/update_local_user_usecase.dart';
 import 'package:domain/user_provider.dart';
@@ -66,6 +67,11 @@ extension DomainInjector on GetIt {
       ..registerFactory<UpdateLocalUserUsecase>(
         () => UpdateLocalUserUsecase(
           userSingleValueStore: get(),
+        ),
+      )
+      ..registerFactory<GetPhotoUsecase>(
+        () => GetPhotoUsecase(
+          getPhotoRemoteSourceAction: get(),
         ),
       );
   }

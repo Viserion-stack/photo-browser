@@ -2,15 +2,21 @@
 
 import 'package:dio/dio.dart';
 import 'package:domain/auth_token_provider.dart';
+import 'package:domain/data_source_action/get_photo_remote_source_action.dart';
 import 'package:domain/data_source_action/get_user_remote_source_action.dart';
+import 'package:domain/model/photo.dart';
 import 'package:domain/model/user.dart';
 import 'package:flutter_pretty_dio_logger/flutter_pretty_dio_logger.dart';
 import 'package:get_it/get_it.dart';
+import 'package:remote/api/photo_rest_api.dart';
 import 'package:remote/api/user_rest_api.dart';
+import 'package:remote/data_source_action/get_photo_remote_source_action_impl.dart';
 import 'package:remote/data_source_action/get_user_remote_source_action_impl.dart';
 import 'package:remote/dio_provider.dart';
 import 'package:remote/mapper/mapper.dart';
+import 'package:remote/mapper/photo_remote_to_photo_mapper.dart';
 import 'package:remote/mapper/user_remote_to_user_mapper.dart';
+import 'package:remote/models/photo/photo_remote_model.dart';
 import 'package:remote/models/user/user_remote_model.dart';
 import 'package:remote/other/error/error_converter.dart';
 
@@ -60,6 +66,13 @@ extension RemoteInjector on GetIt {
           errorConverter: get(),
           userRemoteToUserMapper: get(),
         ),
+      )
+      ..registerFactory<GetPhotoRemoteSourceAction>(
+        () => GetPhotoRemoteSourceActionImpl(
+          photoRestApi: get(),
+          errorConverter: get(),
+          photoRemoteToPhotoMapper: get(),
+        ),
       );
   }
 
@@ -67,6 +80,9 @@ extension RemoteInjector on GetIt {
     this
       ..registerFactory<UserRestApi>(
         () => UserRestApi(get(instanceName: DioProvider.dioNoAuth)),
+      )
+      ..registerFactory<PhotoRestApi>(
+        () => PhotoRestApi(get(instanceName: DioProvider.dioNoAuth)),
       );
   }
 
@@ -74,6 +90,9 @@ extension RemoteInjector on GetIt {
     this
       ..registerFactory<Mapper<List<UserRemoteModel>, List<User>>>(
         () => const UserRemoteToUserMapper(),
+      )
+      ..registerFactory<Mapper<List<PhotoRemoteModel>, List<Photo>>>(
+        () => const PhotoRemoteToPhotoMapper(),
       );
   }
 }

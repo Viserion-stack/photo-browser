@@ -44,6 +44,7 @@ Future<void> init({
       (argument, _) => DashboardHomeBloc(
         argument: argument,
         getUserUsecase: injector.get(),
+        getPhotoUsecase: injector.get(),
       ),
     )
     ..registerFactoryParam<DashboardProfileBloc, DashboardProfileArgument, void>(
