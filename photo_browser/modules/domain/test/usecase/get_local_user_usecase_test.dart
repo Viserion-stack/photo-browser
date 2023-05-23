@@ -27,10 +27,7 @@ void main() {
       test(
         'Should return user when no error has occurred',
         () async {
-          const user = User(
-            name: 'name',
-            email: 'email',
-          );
+          final user = User.initial();
 
           when(() => mockUserSingleValueStore.read()).thenReturn(TaskEither<SingleValueStoreFailure, User>.right(user));
 

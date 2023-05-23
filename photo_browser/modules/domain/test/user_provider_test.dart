@@ -35,10 +35,7 @@ void main() {
         },
       );
 
-      const user = User(
-        name: 'name',
-        email: 'email',
-      );
+      final user = User.initial();
 
       group(
         'restoreUser',

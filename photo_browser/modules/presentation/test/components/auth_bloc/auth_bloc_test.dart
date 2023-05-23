@@ -22,11 +22,7 @@ void main() {
   late MockUserStreamSubscription mockUserStreamSubscription;
   late AuthBloc bloc;
 
-  const user = User(
-    description: 'dsd',
-    id: 'dsadsa',
-    urls: [],
-  );
+  final user = User.initial();
 
   setUp(
     () {
@@ -108,7 +104,7 @@ void main() {
     'on AuthEvent.onInitiated emits update of user and userStateType '
     'when user is not null',
     build: () => bloc,
-    act: (bloc) => bloc.add(const AuthEvent.onUserUpdated(user)),
+    act: (bloc) => bloc.add(AuthEvent.onUserUpdated(user)),
     expect: () => [
       AuthState.initial().copyWith(
         userStateType: StateType.loaded,

@@ -5,10 +5,7 @@ void main() {
   group(
     'User',
     () {
-      const user = User(
-        name: 'name',
-        email: 'email',
-      );
+      final user = User.initial();
 
       test(
         'should create user model from Json',
