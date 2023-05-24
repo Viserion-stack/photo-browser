@@ -1,5 +1,5 @@
-import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:domain/store/storable.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'photo.freezed.dart';
 part 'photo.g.dart';

@@ -17,15 +17,11 @@ void main() {
         'should correctly map remote model to domain model',
         () {
           const userRemoteModel = UserRemoteModel(
-            id: 0,
             name: 'name',
             email: 'email',
           );
 
-          const user = User(
-            name: 'name',
-            email: 'email',
-          );
+          final user = User.initial();
 
           final result = userRemoteToUserMapper.map(userRemoteModel);
 

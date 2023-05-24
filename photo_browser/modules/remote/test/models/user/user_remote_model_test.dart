@@ -6,7 +6,6 @@ void main() {
     'UserRemoteModel',
     () {
       const user = UserRemoteModel(
-        id: 0,
         name: 'name',
         email: 'email',
       );

@@ -24,7 +24,7 @@ void main() {
         },
       );
 
-      const user = User(
+      final user = User(
         name: 'name',
         email: 'email',
       );

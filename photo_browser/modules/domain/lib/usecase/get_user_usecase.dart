@@ -5,7 +5,7 @@ import 'package:fpdart/fpdart.dart';
 
 enum GetUserFailure { fatal }
 
-class GetUserUsecase implements UseCase<GetUserFailure, List<User>> {
+class GetUserUsecase implements UseCase<GetUserFailure, User> {
   const GetUserUsecase({
     required GetUserRemoteSourceAction getUserRemoteSourceAction,
   }) : _getUserRemoteSourceAction = getUserRemoteSourceAction;
@@ -13,7 +13,7 @@ class GetUserUsecase implements UseCase<GetUserFailure, List<User>> {
   final GetUserRemoteSourceAction _getUserRemoteSourceAction;
 
   @override
-  TaskEither<GetUserFailure, List<User>> execute() {
+  TaskEither<GetUserFailure, User> execute() {
     return _getUserRemoteSourceAction.execute().bimap(
           (errorDetail) => errorDetail.map(
             backend: (backendError) {

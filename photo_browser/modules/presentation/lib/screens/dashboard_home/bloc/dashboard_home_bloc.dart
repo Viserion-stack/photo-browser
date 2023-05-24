@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:domain/model/photo.dart';
-import 'package:domain/model/user.dart';
+
 import 'package:domain/usecase/get_photo_usecase.dart';
 import 'package:domain/usecase/get_user_usecase.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

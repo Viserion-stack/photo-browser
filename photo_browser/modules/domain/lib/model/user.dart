@@ -8,13 +8,15 @@ part 'user.g.dart';
 class User with _$User implements Storable {
   static const loggedInUserStoreKey = 'loggedInUserStore';
 
-   factory User({
-    required String id,
-    required Map<String, dynamic> urls,
-    String? description,
+  factory User({
+    required String name,
+    required String email,
   }) = _User;
 
-   factory User.initial() =>   User(id: 'dupa', description: '', urls: {},);
+  factory User.initial() => User(
+        name: 'name',
+        email: 'email',
+      );
 
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
 }

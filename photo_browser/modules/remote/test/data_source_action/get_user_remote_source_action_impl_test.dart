@@ -57,8 +57,8 @@ void main() {
       test(
         'Should return user when no error has occurred',
         () async {
-          const user = User(name: 'name', email: 'name@example.com');
-          const remoteUser = UserRemoteModel(id: 1, name: 'name', email: 'name@example.com');
+          final user = User.initial();
+          const remoteUser = UserRemoteModel(name: 'name', email: 'name@example.com');
 
           when(() => mockUserRemoteToUserMapper.map(any(that: equals(remoteUser)))).thenReturn(user);
           when(() => mockUserRestApi.getCurrentUser()).thenAnswer((_) async => remoteUser);

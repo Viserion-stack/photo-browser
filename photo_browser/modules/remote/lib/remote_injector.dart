@@ -88,7 +88,7 @@ extension RemoteInjector on GetIt {
 
   void _registerMappers() {
     this
-      ..registerFactory<Mapper<List<UserRemoteModel>, List<User>>>(
+      ..registerFactory<Mapper<UserRemoteModel, User>>(
         () => const UserRemoteToUserMapper(),
       )
       ..registerFactory<Mapper<List<PhotoRemoteModel>, List<Photo>>>(
