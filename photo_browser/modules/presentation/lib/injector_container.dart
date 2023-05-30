@@ -23,7 +23,9 @@ Future<void> init({
   await injector.registerDomain();
 
   injector
-    ..registerRemote(baseUrl: apiUrl)
+    ..registerRemote(
+      baseUrl: apiUrl,
+    )
     ..registerLazySingleton<AuthBloc>(
       () => AuthBloc(
         userProvider: injector.get(),

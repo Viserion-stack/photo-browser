@@ -22,6 +22,8 @@ dependencies:
   get_it: 7.2.0
   json_annotation: 4.8.0
   json_serializable: 6.6.0
+  presentation:
+    path: ../presentation
   project_linter:
     path: ../project_linter
   retrofit: 3.3.1

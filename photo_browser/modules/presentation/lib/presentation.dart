@@ -1,5 +1,3 @@
-
-
 import 'dart:async';
 
 import 'package:flutter/foundation.dart';
@@ -18,6 +16,7 @@ Future<void> runApplication() async {
 
   await di.init(
     apiUrl: Env.apiUrl,
+    
   );
 
   _runAppLogger();

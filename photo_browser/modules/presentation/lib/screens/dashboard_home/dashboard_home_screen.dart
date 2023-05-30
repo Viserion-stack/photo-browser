@@ -20,7 +20,7 @@ class DashboardHomeScreen extends StatelessWidget {
                   onPressed: () => context.read<DashboardHomeBloc>().add(const DashboardHomeEvent.photosFetched()),
                   child: const Text('Get photo'),
                 ),
-                Text(state.photo[3].description ?? 'null'),
+                if (state.photo.isNotEmpty) Text(state.photo[0].description ?? 'null'),
               ],
             ),
           );
