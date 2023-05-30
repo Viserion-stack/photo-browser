@@ -27,7 +27,7 @@ class DashboardBottomNavigationBar extends StatelessWidget {
   static const _navigationBarRadius = Radius.circular(20);
   static const _navigationBarSpreadRadius = 1.0;
   static const _navigationBarBlurRadius = 20.0;
-  static const _navigationBarShadowOpacity = 0.5;
+  static const _navigationBarShadowOpacity = 0.2;
   static const _iconTopPadding = 10.0;
 
   @override
