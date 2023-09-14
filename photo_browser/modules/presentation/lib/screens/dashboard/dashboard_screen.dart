@@ -25,25 +25,19 @@ class DashboardBottomNavigationBar extends StatelessWidget {
   const DashboardBottomNavigationBar({super.key});
 
   static const _navigationBarRadius = Radius.circular(20);
-  static const _navigationBarSpreadRadius = 1.0;
-  static const _navigationBarBlurRadius = 20.0;
-  static const _navigationBarShadowOpacity = 0.2;
   static const _iconTopPadding = 10.0;
 
   @override
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        boxShadow: [
-          BoxShadow(
-            color: context.palette.darkGrayColor.withOpacity(_navigationBarShadowOpacity),
-            spreadRadius: _navigationBarSpreadRadius,
-            blurRadius: _navigationBarBlurRadius,
-          ),
-        ],
         borderRadius: const BorderRadius.only(
           topLeft: _navigationBarRadius,
           topRight: _navigationBarRadius,
+        ),
+        border: Border.all(
+          color: context.palette.primaryColor,
+          width: 2,
         ),
       ),
       child: ClipRRect(

@@ -6,14 +6,13 @@ import 'package:presentation/screens/dashboard_home/bloc/dashboard_home_bloc.dar
 import 'package:presentation/screens/dashboard_home/dashboard_home_argument.dart';
 import 'package:presentation/screens/dashboard_home/dashboard_home_screen.dart';
 
-Widget dashboardHomeRoute(GoRouterState state) =>  MultiBlocProvider(
+Widget dashboardHomeRoute(GoRouterState state) => MultiBlocProvider(
       providers: [
         BlocProvider<DashboardHomeBloc>(
           create: (context) => injector<DashboardHomeBloc>(
             param1: state.extra ?? const DashboardHomeArgument(),
-          )..add(const DashboardHomeEvent.onInitiated()),
+          )..add(const DashboardHomeEvent.photosFetched()),
         ),
       ],
       child: DashboardHomeScreen(),
     );
-  

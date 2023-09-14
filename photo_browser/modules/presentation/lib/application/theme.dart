@@ -44,7 +44,7 @@ class LightPalette extends Palette {
   @override
   final Color cardColor = const Color(0xffffffff);
   @override
-  final Color primaryColor = const Color(0xff1A3C64);
+  final Color primaryColor = const Color(0xff000000);
   @override
   final Color primaryDarkColor = const Color(0xff112C4B);
   @override
@@ -52,7 +52,7 @@ class LightPalette extends Palette {
   @override
   final Color accentColor = const Color(0xff1FA0B0);
   @override
-  final Color accentVariantColor = const Color(0xff84B340);
+  final Color accentVariantColor = const Color(0xff000000);
   @override
   final Color errorColor = const Color(0xffEB4B48);
   @override
@@ -72,7 +72,7 @@ class LightPalette extends Palette {
   @override
   final Color badgeColor2 = const Color(0xff0022AA);
   @override
-  final Color badgeColor3 = const Color(0xff84B340);
+  final Color badgeColor3 = const Color(0xff000000);
   @override
   final Color badgeColor4 = const Color(0xff5D1B97);
 }
@@ -99,7 +99,7 @@ class DarkPalette extends Palette {
   @override
   final Color accentColor = const Color(0xff1FA0B0);
   @override
-  final Color accentVariantColor = const Color(0xff84B340);
+  final Color accentVariantColor = const Color(0xff000000);
   @override
   final Color errorColor = const Color(0xffEB4B48);
   @override
@@ -119,7 +119,7 @@ class DarkPalette extends Palette {
   @override
   final Color badgeColor2 = const Color(0xff0022AA);
   @override
-  final Color badgeColor3 = const Color(0xff84B340);
+  final Color badgeColor3 = const Color(0xff000000);
   @override
   final Color badgeColor4 = const Color(0xff5D1B97);
 }
@@ -169,11 +169,11 @@ class AppTheme {
       ),
       bottomNavigationBarTheme: BottomNavigationBarThemeData(
         selectedIconTheme: IconThemeData(color: palette.accentVariantColor),
-        unselectedIconTheme: IconThemeData(color: palette.primaryColor),
+        unselectedIconTheme: IconThemeData(color: palette.inactiveColor),
         selectedItemColor: palette.accentVariantColor,
         unselectedItemColor: palette.primaryColor,
         selectedLabelStyle: TextStyle(color: palette.accentVariantColor),
-        unselectedLabelStyle: TextStyle(color: palette.primaryColor),
+        unselectedLabelStyle: TextStyle(color: palette.inactiveColor),
         showSelectedLabels: true,
         showUnselectedLabels: true,
         type: BottomNavigationBarType.fixed,
@@ -188,62 +188,62 @@ class AppTheme {
   }
 
   TextTheme get _textThemeHandset => TextTheme(
-        displayLarge: GoogleFonts.lato(
+        displayLarge: GoogleFonts.jollyLodger(
           fontSize: 36,
           fontWeight: FontWeight.w400,
           letterSpacing: 0.48,
         ),
-        displayMedium: GoogleFonts.lato(
+        displayMedium: GoogleFonts.jollyLodger(
           fontSize: 28,
           fontWeight: FontWeight.w400,
           letterSpacing: 0.48,
         ),
-        displaySmall: GoogleFonts.lato(
+        displaySmall: GoogleFonts.jollyLodger(
           fontSize: 22,
           fontWeight: FontWeight.w400,
           letterSpacing: 0.48,
         ),
-        headlineSmall: GoogleFonts.lato(
+        headlineSmall: GoogleFonts.jollyLodger(
           fontSize: 17,
           fontWeight: FontWeight.w600,
           letterSpacing: -0.408,
         ),
-        titleLarge: GoogleFonts.lato(
+        titleLarge: GoogleFonts.jollyLodger(
           fontSize: 14,
           fontWeight: FontWeight.w400,
           letterSpacing: -0.078,
         ),
-        titleMedium: GoogleFonts.lato(
+        titleMedium: GoogleFonts.jollyLodger(
           fontSize: 16,
           fontWeight: FontWeight.bold,
           letterSpacing: 0.19,
         ),
-        titleSmall: GoogleFonts.lato(
+        titleSmall: GoogleFonts.jollyLodger(
           fontSize: 12,
           fontWeight: FontWeight.w500,
           letterSpacing: 0.64,
         ),
-        bodyLarge: GoogleFonts.lato(
+        bodyLarge: GoogleFonts.jollyLodger(
           fontSize: 16,
           fontWeight: FontWeight.w500,
           letterSpacing: 0.32,
         ),
-        bodyMedium: GoogleFonts.lato(
+        bodyMedium: GoogleFonts.jollyLodger(
           fontSize: 14,
           fontWeight: FontWeight.w300,
           letterSpacing: 0.32,
         ),
-        labelLarge: GoogleFonts.lato(
+        labelLarge: GoogleFonts.jollyLodger(
           fontSize: 18,
           fontWeight: FontWeight.w500,
           letterSpacing: 0.32,
         ),
-        bodySmall: GoogleFonts.lato(
+        bodySmall: GoogleFonts.jollyLodger(
           fontSize: 18,
           fontWeight: FontWeight.w400,
           letterSpacing: 0.32,
         ),
-        labelSmall: GoogleFonts.lato(
+        labelSmall: GoogleFonts.jollyLodger(
           fontSize: 12,
           fontWeight: FontWeight.w300,
           letterSpacing: 0.64,

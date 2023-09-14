@@ -33,12 +33,17 @@ class DashboardHomeBloc extends Bloc<DashboardHomeEvent, DashboardHomeState> {
   Future<void> _onInitiated(_OnInitiated event, Emitter<DashboardHomeState> emit) async {}
 
   Future<void> _onPhotoFetched(_PhotosFetched event, Emitter<DashboardHomeState> emit) async {
+    emit(state.copyWith(type: StateType.loading));
     final result = await _getPhotoUsecase
         .execute()
         .match(
-          (l) => state.copyWith(photo: state.photo),
+          (l) => state.copyWith(
+            photo: state.photo,
+            type: StateType.error,
+          ),
           (r) => state.copyWith(
             photo: r,
+            type: StateType.loaded,
           ),
         )
         .run();

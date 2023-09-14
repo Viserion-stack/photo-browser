@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:presentation/application/app_const.dart';
 import 'package:presentation/components/auth/bloc/auth_bloc.dart';
+import 'package:presentation/widgets/logo_widget.dart';
 
 class SplashScreen extends HookWidget {
   static const String routeName = '/';
@@ -38,7 +39,7 @@ class SplashScreen extends HookWidget {
           AnimatedBuilder(
             animation: controller,
             child: const Center(
-              child: Text('Splash screen'),
+              child: LogoWidget(),
             ),
             builder: (context, child) => Transform.rotate(
               angle: controller.value * 2.0 * math.pi,

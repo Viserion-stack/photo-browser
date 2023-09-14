@@ -9,6 +9,8 @@ class AppAssets {
   static const String _imagePath = '$_assetsPath/images';
   // ignore: unused_field
   static const String _svgPath = '$_assetsPath/svg';
+
+  static const String photoBrowserLogo = '$_svgPath/photo_browser_logo.svg';
 }
 
 extension Assets on BuildContext {
