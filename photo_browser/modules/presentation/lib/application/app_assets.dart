@@ -11,6 +11,7 @@ class AppAssets {
   static const String _svgPath = '$_assetsPath/svg';
 
   static const String photoBrowserLogo = '$_svgPath/photo_browser_logo.svg';
+  static const String photoBrowserLogoNew = '$_svgPath/logo_new.svg';
 }
 
 extension Assets on BuildContext {

@@ -86,9 +86,7 @@ void _onItemTapped(int index, BuildContext context) {
   switch (index) {
     case 0:
       context.go(DashboardHomeScreen.routeName);
-      break;
     case 1:
       context.go(DashboardProfileScreen.routeName);
-      break;
   }
 }

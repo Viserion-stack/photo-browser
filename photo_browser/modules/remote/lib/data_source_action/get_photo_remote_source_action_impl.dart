@@ -12,21 +12,26 @@ class GetPhotoRemoteSourceActionImpl implements GetPhotoRemoteSourceAction {
   const GetPhotoRemoteSourceActionImpl({
     required PhotoRestApi photoRestApi,
     required ErrorConverter errorConverter,
-    required Mapper<List<PhotoRemoteModel>, List<Photo>> photoRemoteToPhotoMapper,
+    required Mapper<PhotoRemoteModel, Photo> photoRemoteToPhotoMapper,
   })  : _photoRestApi = photoRestApi,
         _errorConverter = errorConverter,
         _photoRemoteToPhotoMapper = photoRemoteToPhotoMapper;
 
   final PhotoRestApi _photoRestApi;
   final ErrorConverter _errorConverter;
-  final Mapper<List<PhotoRemoteModel>, List<Photo>> _photoRemoteToPhotoMapper;
+  final Mapper<PhotoRemoteModel, Photo> _photoRemoteToPhotoMapper;
 
   @override
   TaskEither<ErrorDetail, List<Photo>> execute() {
     return tryCatchE<ErrorDetail, List<Photo>>(
       () async {
         final response = await _photoRestApi.getPhotos();
-        return right(_photoRemoteToPhotoMapper.map(response));
+        final photos = response
+            .map(
+              _photoRemoteToPhotoMapper.map,
+            )
+            .toList();
+        return right(photos);
       },
       _errorConverter.handleRemoteError,
     );

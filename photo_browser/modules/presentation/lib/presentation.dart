@@ -16,7 +16,7 @@ Future<void> runApplication() async {
 
   await di.init(
     apiUrl: Env.apiUrl,
-    
+    clientId: Env.clientId,
   );
 
   _runAppLogger();

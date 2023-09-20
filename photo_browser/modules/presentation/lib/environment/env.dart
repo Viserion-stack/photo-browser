@@ -10,4 +10,6 @@ abstract class Env {
   static final apiUrl = _Env.apiUrl;
   @EnviedField(varName: 'API_KEY')
   static final apiKey = _Env.apiKey;
+  @EnviedField(varName: 'CLIENT_ID')
+  static final clientId = _Env.clientId;
 }

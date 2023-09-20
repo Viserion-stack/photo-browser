@@ -9,6 +9,7 @@ import 'package:domain/usecase/delete_local_user_usecase.dart';
 import 'package:domain/usecase/get_local_user_usecase.dart';
 import 'package:domain/usecase/get_photo_usecase.dart';
 import 'package:domain/usecase/get_user_usecase.dart';
+import 'package:domain/usecase/search_photos_usecase.dart';
 import 'package:domain/usecase/update_local_user_usecase.dart';
 import 'package:domain/user_provider.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
@@ -72,6 +73,11 @@ extension DomainInjector on GetIt {
       ..registerFactory<GetPhotoUsecase>(
         () => GetPhotoUsecase(
           getPhotoRemoteSourceAction: get(),
+        ),
+      )
+      ..registerFactory<SearchPhotosUsecase>(
+        () => SearchPhotosUsecase(
+          searchPhotosRemoteSourceAction: get(),
         ),
       );
   }

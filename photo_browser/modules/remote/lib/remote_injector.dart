@@ -4,25 +4,32 @@ import 'package:dio/dio.dart';
 import 'package:domain/auth_token_provider.dart';
 import 'package:domain/data_source_action/get_photo_remote_source_action.dart';
 import 'package:domain/data_source_action/get_user_remote_source_action.dart';
+import 'package:domain/data_source_action/search_photos_remote_source_action.dart';
 import 'package:domain/model/photo.dart';
+import 'package:domain/model/photographer.dart';
 import 'package:domain/model/user.dart';
 import 'package:flutter_pretty_dio_logger/flutter_pretty_dio_logger.dart';
 import 'package:get_it/get_it.dart';
 import 'package:remote/api/photo_rest_api.dart';
+import 'package:remote/api/search_photos_rest_api.dart';
 import 'package:remote/api/user_rest_api.dart';
 import 'package:remote/data_source_action/get_photo_remote_source_action_impl.dart';
 import 'package:remote/data_source_action/get_user_remote_source_action_impl.dart';
+import 'package:remote/data_source_action/search_photos_remote_source_action_impl.dart';
 import 'package:remote/dio_provider.dart';
 import 'package:remote/mapper/mapper.dart';
 import 'package:remote/mapper/photo_remote_to_photo_mapper.dart';
+import 'package:remote/mapper/photographer_remote_to_photographer_mapper.dart';
 import 'package:remote/mapper/user_remote_to_user_mapper.dart';
 import 'package:remote/models/photo/photo_remote_model.dart';
+import 'package:remote/models/photographer/photographer_remote_model.dart';
 import 'package:remote/models/user/user_remote_model.dart';
 import 'package:remote/other/error/error_converter.dart';
 
 extension RemoteInjector on GetIt {
   void registerRemote({
     required String baseUrl,
+    required String clientId,
   }) {
     this
       .._registerMappers()
@@ -41,6 +48,7 @@ extension RemoteInjector on GetIt {
       ..registerLazySingleton<Dio>(
         () => DioProvider.create(
           baseUrl: baseUrl,
+          clientId: clientId,
           prettyDioLogger: get(),
           addAuthorizationInterceptor: true,
           authTokenProvider: get<AuthTokenProvider>(),
@@ -50,6 +58,7 @@ extension RemoteInjector on GetIt {
       ..registerLazySingleton<Dio>(
         () => DioProvider.create(
           baseUrl: baseUrl,
+          clientId: clientId,
           prettyDioLogger: get(),
           addAuthorizationInterceptor: false,
           authTokenProvider: get<AuthTokenProvider>(),
@@ -73,6 +82,13 @@ extension RemoteInjector on GetIt {
           errorConverter: get(),
           photoRemoteToPhotoMapper: get(),
         ),
+      )
+      ..registerFactory<SearchPhotosRemoteSourceAction>(
+        () => SearchPhotosRemoteSourceActionImpl(
+          searchPhotosRestApi: get(),
+          errorConverter: get(),
+          photoRemoteToPhotoMapper: get(),
+        ),
       );
   }
 
@@ -82,7 +98,10 @@ extension RemoteInjector on GetIt {
         () => UserRestApi(get(instanceName: DioProvider.dioNoAuth)),
       )
       ..registerFactory<PhotoRestApi>(
-        () => PhotoRestApi(get(instanceName: DioProvider.dioNoAuth)),
+        () => PhotoRestApi(get(instanceName: DioProvider.dioAuth)),
+      )
+      ..registerFactory<SearchPhotosRestApi>(
+        () => SearchPhotosRestApi(get(instanceName: DioProvider.dioAuth)),
       );
   }
 
@@ -91,8 +110,11 @@ extension RemoteInjector on GetIt {
       ..registerFactory<Mapper<UserRemoteModel, User>>(
         () => const UserRemoteToUserMapper(),
       )
-      ..registerFactory<Mapper<List<PhotoRemoteModel>, List<Photo>>>(
-        () => const PhotoRemoteToPhotoMapper(),
+      ..registerFactory<Mapper<PhotographerRemoteModel, Photographer>>(
+        () => const PhotographerRemoteToPhotographerMapper(),
+      )
+      ..registerFactory<Mapper<PhotoRemoteModel, Photo>>(
+        () => PhotoRemoteToPhotoMapper(photographerRemoteToPhotographerMapper: get()),
       );
   }
 }

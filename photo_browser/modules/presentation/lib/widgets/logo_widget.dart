@@ -10,7 +10,7 @@ class LogoWidget extends StatelessWidget {
     return SizedBox(
       height: _imageHeight,
       width: double.infinity,
-      child: context.svgImage(AppAssets.photoBrowserLogo),
+      child: context.svgImage(AppAssets.photoBrowserLogoNew),
     );
   }
 }

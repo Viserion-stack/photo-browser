@@ -8,6 +8,6 @@ part 'photo_rest_api.g.dart';
 abstract class PhotoRestApi {
   factory PhotoRestApi(Dio dio) = _PhotoRestApi;
 
-  @GET('/photos/?client_id=vS_xTaCqEL-WjfB0U3BGITdAbPtC9vuAkwLf_zSxh1k')
+  @GET('/photos')
   Future<List<PhotoRemoteModel>> getPhotos();
 }

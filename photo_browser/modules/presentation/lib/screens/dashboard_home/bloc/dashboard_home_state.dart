@@ -6,6 +6,7 @@ class DashboardHomeState with _$DashboardHomeState {
     required StateType type,
     required DashboardHomeArgument argument,
     required List<Photo> photo,
+    required bool isLoadMoreRunning,
   }) = _DashboardHomeState;
 
   factory DashboardHomeState.initial({required DashboardHomeArgument argument}) {
@@ -13,6 +14,7 @@ class DashboardHomeState with _$DashboardHomeState {
       type: StateType.loading,
       argument: argument,
       photo: [Photo.initial()],
+      isLoadMoreRunning: false,
     );
   }
 }

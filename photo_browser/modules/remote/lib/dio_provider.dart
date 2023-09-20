@@ -11,33 +11,35 @@ class DioProvider {
 
   static Dio create({
     required String baseUrl,
+    required String clientId,
     required AuthTokenProvider authTokenProvider,
     required PrettyDioLogger prettyDioLogger,
     required bool addAuthorizationInterceptor,
   }) {
     final dio = Dio()
       ..options.baseUrl = baseUrl
-      ..options.responseType = ResponseType.json;
+      ..options.responseType = ResponseType.json
+      ..options.headers.addAll({'Authorization': 'Client-ID $clientId'});
 
     if (!kReleaseMode) {
       dio.interceptors.add(prettyDioLogger);
     }
 
     if (addAuthorizationInterceptor) {
-      dio.interceptors.add(_authorizationInterceptor(authTokenProvider));
+      dio.interceptors.add(_authorizationInterceptor(authTokenProvider, clientId));
     }
 
     return dio;
   }
 
-  static InterceptorsWrapper _authorizationInterceptor(AuthTokenProvider authTokenProvider) {
+  static InterceptorsWrapper _authorizationInterceptor(AuthTokenProvider authTokenProvider, String clientId) {
     return InterceptorsWrapper(
       onRequest: (options, interceptorHandler) async {
         final token = await authTokenProvider.token;
         if (token.isNotEmpty) {
           options.headers.addAll(
             {
-              'Content-Type': 'application/json',
+              'contentType': 'application/json',
             },
           );
         }

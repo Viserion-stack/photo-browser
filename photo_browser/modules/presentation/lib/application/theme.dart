@@ -87,7 +87,7 @@ class DarkPalette extends Palette {
   @override
   final Color inactiveColor = const Color(0xffA1A3A6);
   @override
-  final Color snackBarColor = const Color(0xb3ffffff);
+  final Color snackBarColor = const Color(0xffffffff);
   @override
   final Color cardColor = const Color(0xffffffff);
   @override
@@ -188,62 +188,62 @@ class AppTheme {
   }
 
   TextTheme get _textThemeHandset => TextTheme(
-        displayLarge: GoogleFonts.jollyLodger(
+        displayLarge: GoogleFonts.changa(
           fontSize: 36,
           fontWeight: FontWeight.w400,
           letterSpacing: 0.48,
         ),
-        displayMedium: GoogleFonts.jollyLodger(
+        displayMedium: GoogleFonts.changa(
           fontSize: 28,
           fontWeight: FontWeight.w400,
           letterSpacing: 0.48,
         ),
-        displaySmall: GoogleFonts.jollyLodger(
+        displaySmall: GoogleFonts.changa(
           fontSize: 22,
           fontWeight: FontWeight.w400,
           letterSpacing: 0.48,
         ),
-        headlineSmall: GoogleFonts.jollyLodger(
+        headlineSmall: GoogleFonts.changa(
           fontSize: 17,
           fontWeight: FontWeight.w600,
           letterSpacing: -0.408,
         ),
-        titleLarge: GoogleFonts.jollyLodger(
+        titleLarge: GoogleFonts.changa(
           fontSize: 14,
           fontWeight: FontWeight.w400,
           letterSpacing: -0.078,
         ),
-        titleMedium: GoogleFonts.jollyLodger(
+        titleMedium: GoogleFonts.changa(
           fontSize: 16,
           fontWeight: FontWeight.bold,
           letterSpacing: 0.19,
         ),
-        titleSmall: GoogleFonts.jollyLodger(
+        titleSmall: GoogleFonts.changa(
           fontSize: 12,
           fontWeight: FontWeight.w500,
           letterSpacing: 0.64,
         ),
-        bodyLarge: GoogleFonts.jollyLodger(
+        bodyLarge: GoogleFonts.changa(
           fontSize: 16,
           fontWeight: FontWeight.w500,
           letterSpacing: 0.32,
         ),
-        bodyMedium: GoogleFonts.jollyLodger(
+        bodyMedium: GoogleFonts.changa(
           fontSize: 14,
           fontWeight: FontWeight.w300,
           letterSpacing: 0.32,
         ),
-        labelLarge: GoogleFonts.jollyLodger(
+        labelLarge: GoogleFonts.changa(
           fontSize: 18,
           fontWeight: FontWeight.w500,
           letterSpacing: 0.32,
         ),
-        bodySmall: GoogleFonts.jollyLodger(
+        bodySmall: GoogleFonts.changa(
           fontSize: 18,
           fontWeight: FontWeight.w400,
           letterSpacing: 0.32,
         ),
-        labelSmall: GoogleFonts.jollyLodger(
+        labelSmall: GoogleFonts.changa(
           fontSize: 12,
           fontWeight: FontWeight.w300,
           letterSpacing: 0.64,

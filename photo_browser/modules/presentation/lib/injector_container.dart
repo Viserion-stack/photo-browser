@@ -19,12 +19,14 @@ final injector = GetIt.instance;
 
 Future<void> init({
   required String apiUrl,
+  required String clientId,
 }) async {
   await injector.registerDomain();
 
   injector
     ..registerRemote(
       baseUrl: apiUrl,
+      clientId: clientId,
     )
     ..registerLazySingleton<AuthBloc>(
       () => AuthBloc(
@@ -44,10 +46,10 @@ Future<void> init({
     )
     ..registerFactoryParam<DashboardHomeBloc, DashboardHomeArgument, void>(
       (argument, _) => DashboardHomeBloc(
-        argument: argument,
-        getUserUsecase: injector.get(),
-        getPhotoUsecase: injector.get(),
-      ),
+          argument: argument,
+          getUserUsecase: injector.get(),
+          getPhotoUsecase: injector.get(),
+          searchPhotosUsecase: injector.get()),
     )
     ..registerFactoryParam<DashboardProfileBloc, DashboardProfileArgument, void>(
       (argument, _) => DashboardProfileBloc(
