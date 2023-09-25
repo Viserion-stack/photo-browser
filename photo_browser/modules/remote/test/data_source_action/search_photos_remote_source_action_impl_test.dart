@@ -95,7 +95,7 @@ void main() {
           when(
             () => mockSearchPhotosRestApi.searchPhotos(query: 'query', page: 1),
           ).thenAnswer(
-            (invocation) async => searchPhotosResponseRemoteModel,
+            (_) async => searchPhotosResponseRemoteModel,
           );
 
           final result = await searchPhotosRemoteSourceActionImpl.execute('query', 1).run();

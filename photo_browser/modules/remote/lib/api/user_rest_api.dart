@@ -11,6 +11,6 @@ abstract class UserRestApi {
   @GET('/users/1')
   Future<UserRemoteModel> getCurrentUser();
 
-  @GET('/photos/?client_id=vS_xTaCqEL-WjfB0U3BGITdAbPtC9vuAkwLf_zSxh1k')
+  @GET('/photos')
   Future<List<UserRemoteModel>> getPhotos();
 }

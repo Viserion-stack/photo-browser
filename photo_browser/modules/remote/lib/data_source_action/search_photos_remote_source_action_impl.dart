@@ -31,6 +31,7 @@ class SearchPhotosRemoteSourceActionImpl implements SearchPhotosRemoteSourceActi
               _photoRemoteToPhotoMapper.map,
             )
             .toList();
+
         return right(photos);
       },
       _errorConverter.handleRemoteError,

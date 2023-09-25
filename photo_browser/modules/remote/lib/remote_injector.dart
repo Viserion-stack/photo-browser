@@ -2,10 +2,14 @@
 
 import 'package:dio/dio.dart';
 import 'package:domain/auth_token_provider.dart';
+import 'package:domain/data_source_action/get_photo_details_remote_source_action.dart';
 import 'package:domain/data_source_action/get_photo_remote_source_action.dart';
 import 'package:domain/data_source_action/get_user_remote_source_action.dart';
 import 'package:domain/data_source_action/search_photos_remote_source_action.dart';
 import 'package:domain/model/photo.dart';
+import 'package:domain/model/photo_details.dart';
+import 'package:domain/model/photo_location.dart';
+import 'package:domain/model/photo_urls.dart';
 import 'package:domain/model/photographer.dart';
 import 'package:domain/model/user.dart';
 import 'package:flutter_pretty_dio_logger/flutter_pretty_dio_logger.dart';
@@ -13,15 +17,22 @@ import 'package:get_it/get_it.dart';
 import 'package:remote/api/photo_rest_api.dart';
 import 'package:remote/api/search_photos_rest_api.dart';
 import 'package:remote/api/user_rest_api.dart';
+import 'package:remote/data_source_action/get_photo_details_remote_source_action_impl.dart';
 import 'package:remote/data_source_action/get_photo_remote_source_action_impl.dart';
 import 'package:remote/data_source_action/get_user_remote_source_action_impl.dart';
 import 'package:remote/data_source_action/search_photos_remote_source_action_impl.dart';
 import 'package:remote/dio_provider.dart';
 import 'package:remote/mapper/mapper.dart';
+import 'package:remote/mapper/photo_detail_remote_model_to_photo_details.dart';
+import 'package:remote/mapper/photo_location_remote_model_to_photo_location.dart';
 import 'package:remote/mapper/photo_remote_to_photo_mapper.dart';
+import 'package:remote/mapper/photo_urls_remote_model_to_photo_urls.dart';
 import 'package:remote/mapper/photographer_remote_to_photographer_mapper.dart';
 import 'package:remote/mapper/user_remote_to_user_mapper.dart';
 import 'package:remote/models/photo/photo_remote_model.dart';
+import 'package:remote/models/photo_details/photo_details_remote_model.dart';
+import 'package:remote/models/photo_location/photo_location_remote_model.dart';
+import 'package:remote/models/photo_urls/photo_urls_remote_model.dart';
 import 'package:remote/models/photographer/photographer_remote_model.dart';
 import 'package:remote/models/user/user_remote_model.dart';
 import 'package:remote/other/error/error_converter.dart';
@@ -89,6 +100,13 @@ extension RemoteInjector on GetIt {
           errorConverter: get(),
           photoRemoteToPhotoMapper: get(),
         ),
+      )
+      ..registerFactory<GetPhotoDetailsRemoteSourceAction>(
+        () => GetPhotoDetailsRemoteSourceActionImpl(
+          photoRestApi: get(),
+          errorConverter: get(),
+          photoDetailsRemoteToPhotoDetails: get(),
+        ),
       );
   }
 
@@ -115,6 +133,19 @@ extension RemoteInjector on GetIt {
       )
       ..registerFactory<Mapper<PhotoRemoteModel, Photo>>(
         () => PhotoRemoteToPhotoMapper(photographerRemoteToPhotographerMapper: get()),
+      )
+      ..registerFactory<Mapper<PhotoLocationRemoteModel, PhotoLocation>>(
+        () => const PhotoLocationRemoteModelToPhotoLocation(),
+      )
+      ..registerFactory<Mapper<PhotoUrlsRemoteModel, PhotoUrls>>(
+        () => const PhotoUrlsRemoteModelToPhotoUrls(),
+      )
+      ..registerFactory<Mapper<PhotoDetailsRemoteModel, PhotoDetails>>(
+        () => PhotoDetailsRemoteModelToPhotoDetails(
+          photoLocationRemoteModelToPhotoLocation: get(),
+          photoUrlsRemoteModelToPhotoUrls: get(),
+          photographerRemoteModelToPhotographer: get(),
+        ),
       );
   }
 }
