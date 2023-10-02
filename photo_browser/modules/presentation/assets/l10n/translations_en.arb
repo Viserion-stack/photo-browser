@@ -11,5 +11,15 @@
   "dashboardHome": "Home",
   "unexpectedError": "Oops... an unexpected error occurred!",
   "noResults": "No results",
-  "searchInputHintText": "Photo name"
+  "searchInputHintText": "Photo name",
+  "newMemberText": "New Member?",
+  "signUpText": "Sign Up",
+  "passwordText": "Password",
+  "emailText": "Email",
+  "confirmPasswordText": "Confirm Password",
+  "nameText": "Name",
+  "loginTitle": "Log in",
+  "loginText": "Login",
+  "loggedMessage": "User logged in",
+  "somethingWetnWrongMessage": "Something went wrong"
 }

@@ -4,7 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:presentation/common/state_type.dart';
 import 'package:presentation/components/auth/bloc/auth_bloc.dart';
 import 'package:presentation/screens/dashboard_home/dashboard_home_screen.dart';
-import 'package:presentation/screens/welcome/welcome_screen.dart';
+import 'package:presentation/screens/login/login_screen.dart';
 
 class AuthNavigationHub extends StatelessWidget {
   const AuthNavigationHub({
@@ -23,13 +23,13 @@ class AuthNavigationHub extends StatelessWidget {
         BlocListener<AuthBloc, AuthState>(
           listenWhen: (previous, current) =>
               previous.isLoggedIn == current.isLoggedIn && previous.userStateType == StateType.initial,
-          listener: (_, __) => rootNavigatorKey.currentContext?.go(WelcomeScreen.routeName),
+          listener: (_, __) => rootNavigatorKey.currentContext?.go(LoginScreen.routeName),
         ),
         // When user signed out
         BlocListener<AuthBloc, AuthState>(
           listenWhen: (previous, current) =>
               previous.isLoggedIn && !current.isLoggedIn && current.userStateType == StateType.loaded,
-          listener: (_, __) => rootNavigatorKey.currentContext?.go(WelcomeScreen.routeName),
+          listener: (_, __) => rootNavigatorKey.currentContext?.go(LoginScreen.routeName),
         ),
         // When user logged in
         BlocListener<AuthBloc, AuthState>(

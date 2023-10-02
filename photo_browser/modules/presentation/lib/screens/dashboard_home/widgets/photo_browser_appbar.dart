@@ -8,7 +8,7 @@ class PhotoBrowserAppBar extends StatelessWidget implements PreferredSizeWidget 
 
   static const _height = 40.0;
   static const _topPadding = 55.0;
-  static const _appBarHeight = 96.0;
+  static const _appBarHeight = 120.0;
 
   @override
   Widget build(BuildContext context) {

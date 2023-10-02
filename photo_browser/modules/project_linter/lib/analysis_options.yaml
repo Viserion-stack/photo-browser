@@ -109,6 +109,8 @@ analyzer:
     must_be_immutable: error
     use_function_type_syntax_for_parameters: ignore
     avoid_shadowing_type_parameters: ignore
+    unused_element: ignore
+    cascade_invocations: ignore
   exclude:
     - "**/*.g.dart"
     - "**/*.freezed.dart"

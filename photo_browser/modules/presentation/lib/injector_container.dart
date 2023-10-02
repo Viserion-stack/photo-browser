@@ -11,8 +11,8 @@ import 'package:presentation/screens/dashboard_home/bloc/dashboard_home_bloc.dar
 import 'package:presentation/screens/dashboard_home/dashboard_home_argument.dart';
 import 'package:presentation/screens/dashboard_profile/bloc/dashboard_profile_bloc.dart';
 import 'package:presentation/screens/dashboard_profile/dashboard_profile_argument.dart';
-import 'package:presentation/screens/welcome/bloc/welcome_bloc.dart';
-import 'package:presentation/screens/welcome/welcome_argument.dart';
+import 'package:presentation/screens/login/bloc/login_bloc.dart';
+import 'package:presentation/screens/login/login_argument.dart';
 import 'package:remote/remote_injector.dart';
 
 final injector = GetIt.instance;
@@ -33,8 +33,8 @@ Future<void> init({
         userProvider: injector.get(),
       ),
     )
-    ..registerFactoryParam<WelcomeBloc, WelcomeArgument, void>(
-      (argument, _) => WelcomeBloc(
+    ..registerFactoryParam<LoginBloc, LoginArgument, void>(
+      (argument, _) => LoginBloc(
         argument: argument,
         userProvider: injector.get(),
       ),

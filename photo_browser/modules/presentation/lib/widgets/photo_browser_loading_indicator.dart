@@ -12,7 +12,7 @@ class PhotoBrowserLoadingIndicator extends StatelessWidget {
     return Center(
       child: LoadingIndicator(
         indicatorType: Indicator.ballClipRotateMultiple,
-        colors: [context.palette.primaryColor],
+        colors: [context.palette.accentVariantColor],
         strokeWidth: _indicatorStrokeWidth,
       ),
     );

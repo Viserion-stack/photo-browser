@@ -6,72 +6,72 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:presentation/common/state_type.dart';
-import 'package:presentation/screens/welcome/bloc/welcome_bloc.dart';
-import 'package:presentation/screens/welcome/welcome_argument.dart';
+import 'package:presentation/screens/login/bloc/login_bloc.dart';
+import 'package:presentation/screens/login/login_argument.dart';
 
 class MockUserProvider extends Mock implements UserProvider {}
 
 void main() {
   late MockUserProvider mockUserProvider;
-  late WelcomeBloc bloc;
+  late LoginBloc bloc;
 
-  const argument = WelcomeArgument();
+  const argument = LoginArgument();
   final user = User.initial();
 
   setUp(
     () {
       mockUserProvider = MockUserProvider();
-      bloc = WelcomeBloc(
+      bloc = LoginBloc(
         argument: argument,
         userProvider: mockUserProvider,
       );
     },
   );
 
-  blocTest<WelcomeBloc, WelcomeState>(
-    'on WelcomeEvent.onInitiated emits nothing',
+  blocTest<LoginBloc, LoginState>(
+    'on LoginEvent.onInitiated emits nothing',
     build: () => bloc,
-    act: (bloc) => bloc.add(const WelcomeEvent.onInitiated()),
+    act: (bloc) => bloc.add(const LoginEvent.onInitiated()),
     expect: () => [],
   );
 
-  blocTest<WelcomeBloc, WelcomeState>(
-    'on WelcomeEvent.onLoggedIn emits update of type '
+  blocTest<LoginBloc, LoginState>(
+    'on LoginEvent.onLoggedIn emits update of type '
     'when updating user returns UpdateLocalUserFailure.fatal error',
     build: () {
       when(() => mockUserProvider.updateUser(user)).thenAnswer((_) => TaskEither.left(UpdateLocalUserFailure.fatal));
       return bloc;
     },
-    seed: () => WelcomeState.initial(argument: argument).copyWith(
+    seed: () => LoginState.initial(argument: argument).copyWith(
       type: StateType.loaded,
     ),
-    act: (bloc) => bloc.add(const WelcomeEvent.onLoggedIn()),
+    act: (bloc) => bloc.add(const LoginEvent.onLoggedIn()),
     expect: () => [
-      WelcomeState.initial(argument: argument).copyWith(
+      LoginState.initial(argument: argument).copyWith(
         type: StateType.loading,
       ),
-      WelcomeState.initial(argument: argument).copyWith(
+      LoginState.initial(argument: argument).copyWith(
         type: StateType.error,
       ),
     ],
   );
 
-  blocTest<WelcomeBloc, WelcomeState>(
-    'on WelcomeEvent.onLoggedIn emits update of type '
+  blocTest<LoginBloc, LoginState>(
+    'on LoginEvent.onLoggedIn emits update of type '
     'when updating user returns no error',
     build: () {
       when(() => mockUserProvider.updateUser(user)).thenAnswer((_) => TaskEither.right(unit));
       return bloc;
     },
-    seed: () => WelcomeState.initial(argument: argument).copyWith(
+    seed: () => LoginState.initial(argument: argument).copyWith(
       type: StateType.loaded,
     ),
-    act: (bloc) => bloc.add(const WelcomeEvent.onLoggedIn()),
+    act: (bloc) => bloc.add(const LoginEvent.onLoggedIn()),
     expect: () => [
-      WelcomeState.initial(argument: argument).copyWith(
+      LoginState.initial(argument: argument).copyWith(
         type: StateType.loading,
       ),
-      WelcomeState.initial(argument: argument).copyWith(
+      LoginState.initial(argument: argument).copyWith(
         type: StateType.success,
       ),
     ],

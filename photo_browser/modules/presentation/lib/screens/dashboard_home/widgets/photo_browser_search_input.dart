@@ -24,18 +24,20 @@ class _PhotoBrowserSearchInputState extends State<PhotoBrowserSearchInput> {
           context.read<DashboardHomeBloc>().add(DashboardHomeEvent.photosSearched(query: query));
         }
       },
+      style: context.textTheme.bodyLarge!.copyWith(color: context.palette.accentVariantColor),
+      cursorColor: context.palette.accentVariantColor,
       decoration: InputDecoration(
         hintText: context.strings.searchInputHintText,
-        hintStyle: context.textTheme.bodyLarge,
+        hintStyle: context.textTheme.bodyLarge!.copyWith(color: context.palette.accentVariantColor),
         focusedBorder: OutlineInputBorder(
           borderSide: BorderSide(
-            color: context.palette.primaryColor,
+            color: context.palette.accentVariantColor,
             width: _borderSideWith,
           ),
           borderRadius: BorderRadius.circular(_borderRadius),
         ),
         enabledBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: context.palette.primaryColor),
+          borderSide: BorderSide(color: context.palette.accentVariantColor),
           borderRadius: BorderRadius.circular(_borderRadius),
         ),
         border: OutlineInputBorder(
@@ -43,7 +45,7 @@ class _PhotoBrowserSearchInputState extends State<PhotoBrowserSearchInput> {
           borderRadius: BorderRadius.circular(_borderRadius),
         ),
         contentPadding: const EdgeInsets.symmetric(
-          vertical: Insets.small,
+          vertical: Insets.xSmall,
           horizontal: Insets.large,
         ),
       ),

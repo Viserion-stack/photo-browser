@@ -36,7 +36,7 @@ class DashboardBottomNavigationBar extends StatelessWidget {
           topRight: _navigationBarRadius,
         ),
         border: Border.all(
-          color: context.palette.primaryColor,
+          color: context.palette.accentVariantColor,
           width: 2,
         ),
       ),

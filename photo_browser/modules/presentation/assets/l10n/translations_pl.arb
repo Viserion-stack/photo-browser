@@ -11,5 +11,15 @@
     "dashboardHome": "Home",
     "unexpectedError": "Ups... wystąpił niespodziewany błąd!",
     "noResults": "Brak wyników",
-    "searchInputHintText": "Nazwa zdjęcia"
+    "searchInputHintText": "Nazwa zdjęcia",
+    "newMemberText": "Jesteś nowy?",
+    "signUpText": "Zarejestruj się",
+    "passwordText": "Hasło",
+    "emailText": "Adres e-mail",
+    "confirmPasswordText": "Potwierdź hasło",
+    "nameText": "Imię",
+    "loginTitle": "Zaloguj się",
+    "loginText": "Zaloguj",
+    "loggedMessage": "Użytkownik zalogowany",
+    "somethingWetnWrongMessage": "Coś poszło nie tak"
 }

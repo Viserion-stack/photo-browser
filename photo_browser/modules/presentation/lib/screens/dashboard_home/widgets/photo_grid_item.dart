@@ -23,7 +23,7 @@ class PhotoGridItem extends StatelessWidget {
           image: NetworkImage(imageUrl),
           fit: BoxFit.cover,
         ),
-        border: Border.all(color: context.palette.primaryColor),
+        border: Border.all(color: context.palette.accentVariantColor),
         borderRadius: BorderRadius.circular(_itemRadius),
       ),
     );

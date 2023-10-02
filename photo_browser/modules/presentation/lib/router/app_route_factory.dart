@@ -7,10 +7,10 @@ import 'package:presentation/screens/dashboard_home/dashboard_home_route.dart';
 import 'package:presentation/screens/dashboard_home/dashboard_home_screen.dart';
 import 'package:presentation/screens/dashboard_profile/dashboard_profile_route.dart';
 import 'package:presentation/screens/dashboard_profile/dashboard_profile_screen.dart';
+import 'package:presentation/screens/login/login_route.dart';
+import 'package:presentation/screens/login/login_screen.dart';
 import 'package:presentation/screens/splash/splash_route.dart';
 import 'package:presentation/screens/splash/splash_screen.dart';
-import 'package:presentation/screens/welcome/welcome_route.dart';
-import 'package:presentation/screens/welcome/welcome_screen.dart';
 
 class AppRouteFactory {
   GoRouter router({
@@ -31,9 +31,9 @@ class AppRouteFactory {
             builder: (_, state) => splashRoute(state),
           ),
           GoRoute(
-            path: WelcomeScreen.routeName,
+            path: LoginScreen.routeName,
             parentNavigatorKey: rootNavigatorKey,
-            builder: (_, state) => welcomeRoute(state),
+            builder: (_, state) => loginRoute(state),
           ),
           ShellRoute(
             navigatorKey: shellNavigatorKey,

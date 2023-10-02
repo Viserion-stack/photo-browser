@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:presentation/application/app.dart';
 import 'package:presentation/common/state_type.dart';
@@ -73,7 +74,7 @@ class _DashboardHomeScreenBodyState extends State<_DashboardHomeScreenBody> {
           padding: const EdgeInsets.only(
             left: Insets.large,
             right: Insets.large,
-            top: Insets.xLarge,
+            top: Insets.medium,
           ),
           child: Column(
             children: [

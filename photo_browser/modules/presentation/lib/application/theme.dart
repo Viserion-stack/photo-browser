@@ -91,7 +91,7 @@ class DarkPalette extends Palette {
   @override
   final Color cardColor = const Color(0xffffffff);
   @override
-  final Color primaryColor = const Color(0xff1A3C64);
+  final Color primaryColor = const Color(0xffffffff);
   @override
   final Color primaryDarkColor = const Color(0xff112C4B);
   @override
