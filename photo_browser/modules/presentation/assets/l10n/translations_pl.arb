@@ -21,5 +21,9 @@
     "loginTitle": "Zaloguj się",
     "loginText": "Zaloguj",
     "loggedMessage": "Użytkownik zalogowany",
-    "somethingWetnWrongMessage": "Coś poszło nie tak"
+    "somethingWetnWrongMessage": "Coś poszło nie tak",
+    "informationText": "Informacje",
+    "signOutText": "Wyloguj",
+    "editProfileText": "Edytuj profil",
+    "favoritePhotosText": "Ulubione zdjęcia"
 }

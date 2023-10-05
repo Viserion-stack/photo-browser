@@ -18,5 +18,7 @@ class DashboardProfileBloc extends Bloc<DashboardProfileEvent, DashboardProfileS
     on<_OnInitiated>(_onInitiated);
   }
 
-  Future<void> _onInitiated(_OnInitiated event, Emitter<DashboardProfileState> emit) async {}
+  Future<void> _onInitiated(_OnInitiated event, Emitter<DashboardProfileState> emit) async {
+    emit(state.copyWith(type: StateType.loaded));
+  }
 }

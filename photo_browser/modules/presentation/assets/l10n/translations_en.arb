@@ -21,5 +21,9 @@
   "loginTitle": "Log in",
   "loginText": "Login",
   "loggedMessage": "User logged in",
-  "somethingWetnWrongMessage": "Something went wrong"
+  "somethingWetnWrongMessage": "Something went wrong",
+  "informationText": "Information",
+  "signOutText": "Sign out",
+  "editProfileText": "Edit profile",
+  "favoritePhotosText": "Favorite photos"
 }

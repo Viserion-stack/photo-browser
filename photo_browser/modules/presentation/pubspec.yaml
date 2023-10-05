@@ -9,6 +9,10 @@ environment:
 
 dependencies:
   adaptive_theme: 3.1.1
+  avatar_glow:
+    git:
+      url: https://github.com/apgapg/avatar_glow
+      ref: master
   bloc_concurrency: 0.2.0
   collection: 1.17.1
   cupertino_icons: 1.0.5
