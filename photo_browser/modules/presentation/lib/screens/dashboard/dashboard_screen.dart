@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:presentation/application/app.dart';
+import 'package:presentation/screens/dashboard/bloc/dashboard_bloc.dart';
 import 'package:presentation/screens/dashboard_home/dashboard_home_screen.dart';
 import 'package:presentation/screens/dashboard_profile/dashboard_profile_screen.dart';
 
@@ -14,9 +16,13 @@ class DashboardScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: child,
-      bottomNavigationBar: const DashboardBottomNavigationBar(),
+    return BlocBuilder<DashboardBloc, DashboardState>(
+      builder: (context, state) {
+        return Scaffold(
+          body: child,
+          bottomNavigationBar: state.isShownBottomMenu ? const DashboardBottomNavigationBar() : const SizedBox.shrink(),
+        );
+      },
     );
   }
 }

@@ -34,17 +34,17 @@ class LightPalette extends Palette {
   @override
   final Brightness brightness = Brightness.light;
   @override
-  final Color shadowColor = const Color(0x1A3C640D);
-  @override
   final Color darkGrayColor = const Color(0xff4D4D4F);
+  @override
+  final Color shadowColor = const Color(0x1A3C640D);
   @override
   final Color inactiveColor = const Color(0xffA1A3A6);
   @override
-  final Color snackBarColor = const Color(0xb3000000);
+  final Color snackBarColor = const Color(0xffffffff);
   @override
   final Color cardColor = const Color(0xffffffff);
   @override
-  final Color primaryColor = const Color(0xff000000);
+  final Color primaryColor = const Color(0xffffffff);
   @override
   final Color primaryDarkColor = const Color(0xff112C4B);
   @override
@@ -62,9 +62,9 @@ class LightPalette extends Palette {
   @override
   final Color textOnPrimaryColor = Colors.white;
   @override
-  final Color primaryTextBodyColor = const Color(0xff173047);
+  final Color primaryTextBodyColor = const Color(0xff1A3C64);
   @override
-  final Color primaryTextDisplayColor = const Color(0xff173047);
+  final Color primaryTextDisplayColor = const Color(0xff1A3C64);
   @override
   final Color appBarBackgroundColor = const Color(0xffF8F9F9);
   @override

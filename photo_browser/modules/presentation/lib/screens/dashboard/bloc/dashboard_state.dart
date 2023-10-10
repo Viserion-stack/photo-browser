@@ -6,6 +6,7 @@ class DashboardState with _$DashboardState {
     required StateType type,
     required DashboardArgument argument,
     required User? user,
+    required bool isShownBottomMenu,
   }) = _DashboardState;
 
   factory DashboardState.initial({required DashboardArgument argument}) {
@@ -13,6 +14,7 @@ class DashboardState with _$DashboardState {
       type: StateType.loading,
       argument: argument,
       user: null,
+      isShownBottomMenu: true,
     );
   }
 }

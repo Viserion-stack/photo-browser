@@ -5,11 +5,13 @@ class DashboardProfileState with _$DashboardProfileState {
   const factory DashboardProfileState({
     required StateType type,
     required DashboardProfileArgument argument,
+    required String profileImagePath,
   }) = _DashboardProfileState;
 
   factory DashboardProfileState.initial({required DashboardProfileArgument argument}) {
     return DashboardProfileState(
       type: StateType.loading,
+      profileImagePath: '',
       argument: argument,
     );
   }

@@ -16,9 +16,14 @@ class DashboardProfileBloc extends Bloc<DashboardProfileEvent, DashboardProfileS
     required DashboardProfileArgument argument,
   }) : super(DashboardProfileState.initial(argument: argument)) {
     on<_OnInitiated>(_onInitiated);
+    on<_OnSelectedProfileImage>(_onSelectedImage);
   }
 
   Future<void> _onInitiated(_OnInitiated event, Emitter<DashboardProfileState> emit) async {
     emit(state.copyWith(type: StateType.loaded));
+  }
+
+  Future<void> _onSelectedImage(_OnSelectedProfileImage event, Emitter<DashboardProfileState> emit) async {
+    emit(state.copyWith(profileImagePath: event.imagePath));
   }
 }

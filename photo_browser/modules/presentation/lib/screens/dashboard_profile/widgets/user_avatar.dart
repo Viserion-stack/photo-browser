@@ -1,12 +1,19 @@
+import 'dart:io';
+
 import 'package:avatar_glow/avatar_glow.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:presentation/application/app.dart';
+import 'package:presentation/components/auth/bloc/auth_bloc.dart';
+import 'package:presentation/screens/dashboard/bloc/dashboard_bloc.dart';
+import 'package:presentation/screens/dashboard_profile/widgets/camera_modal_body.dart';
 
 class UserAvatar extends StatelessWidget {
   const UserAvatar({super.key});
 
   static const _editButtonBottomPadding = 6.0;
   static const _editButtonRightPadding = 2.0;
+  static const _duration = 300;
 
   @override
   Widget build(BuildContext context) {
@@ -18,13 +25,26 @@ class UserAvatar extends StatelessWidget {
           right: _editButtonRightPadding,
           child: _EditPhotoUserButton(
             onTap: () {
-              //TODO: prepare functionality to add/edit user photo
+              context.read<DashboardBloc>().add(const DashboardEvent.hideBottomMenu());
+              _cameraModal(context);
             },
           ),
         ),
       ],
     );
   }
+
+  void _cameraModal(BuildContext context) => showModalBottomSheet(
+        context: context,
+        builder: (context) => const CameraModalBody(),
+      ).whenComplete(
+        () {
+          Future.delayed(
+            const Duration(milliseconds: _duration),
+            () => context.read<DashboardBloc>().add(const DashboardEvent.showBottomMenu()),
+          );
+        },
+      );
 }
 
 class _Avatar extends StatelessWidget {
@@ -37,20 +57,29 @@ class _Avatar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AvatarGlow(
-      glowRadiusFactor: _radiusFactor,
-      glowColor: Colors.grey,
-      duration: const Duration(milliseconds: _duration),
-      child: const Material(
-        elevation: _avatarElevation,
-        shape: CircleBorder(),
-        child: CircleAvatar(
-          backgroundImage: NetworkImage(
-            'https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?cs=srgb&dl=pexels-pixabay-220453.jpg&fm=jpg',
+    return BlocBuilder<AuthBloc, AuthState>(
+      builder: (context, state) {
+        return AvatarGlow(
+          glowRadiusFactor: _radiusFactor,
+          glowColor: Colors.grey,
+          duration: const Duration(milliseconds: _duration),
+          child: Material(
+            elevation: _avatarElevation,
+            shape: const CircleBorder(),
+            child: state.userImage.isNotEmpty
+                ? CircleAvatar(
+                    backgroundImage: FileImage(File(state.userImage)),
+                    radius: _avatarRadius,
+                  )
+                : const CircleAvatar(
+                    backgroundImage: NetworkImage(
+                      'https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?cs=srgb&dl=pexels-pixabay-220453.jpg&fm=jpg',
+                    ),
+                    radius: _avatarRadius,
+                  ),
           ),
-          radius: _avatarRadius,
-        ),
-      ),
+        );
+      },
     );
   }
 }

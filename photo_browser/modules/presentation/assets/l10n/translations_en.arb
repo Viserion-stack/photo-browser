@@ -25,5 +25,8 @@
   "informationText": "Information",
   "signOutText": "Sign out",
   "editProfileText": "Edit profile",
-  "favoritePhotosText": "Favorite photos"
+  "favoritePhotosText": "Favorite photos",
+  "galleryText": "Gallery",
+  "cameraText": "Camera",
+  "camerModalTitle": "Edit profile photo"
 }

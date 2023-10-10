@@ -21,6 +21,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     on<_OnUserUpdated>(_onUserUpdated);
     on<_OnAuthCheckRequested>(_onAuthCheckRequested);
     on<_OnSignedOut>(_onSignedOut);
+    on<_OnSelectedImge>(_onSelectedImage);
   }
 
   final UserProvider _userProvider;
@@ -43,6 +44,10 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         user: event.user,
       ),
     );
+  }
+
+  Future<void> _onSelectedImage(_OnSelectedImge event, Emitter<AuthState> emit) async {
+    emit(state.copyWith(userImage: event.image));
   }
 
   Future<void> _onAuthCheckRequested(_OnAuthCheckRequested event, Emitter<AuthState> emit) async =>

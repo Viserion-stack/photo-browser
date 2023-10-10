@@ -15,7 +15,21 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
     required DashboardArgument argument,
   }) : super(DashboardState.initial(argument: argument)) {
     on<_OnInitiated>(_onInitiated);
+    on<_OnHideBottomMenu>(_onHideBottomMenu);
+    on<_OnShowBottomMenu>(_onShowBottomMenu);
   }
 
   Future<void> _onInitiated(_OnInitiated event, Emitter<DashboardState> emit) async {}
+
+  Future<void> _onHideBottomMenu(_OnHideBottomMenu event, Emitter<DashboardState> emit) async {
+    emit(
+      state.copyWith(isShownBottomMenu: false),
+    );
+  }
+
+  Future<void> _onShowBottomMenu(_OnShowBottomMenu event, Emitter<DashboardState> emit) async {
+    emit(
+      state.copyWith(isShownBottomMenu: true),
+    );
+  }
 }

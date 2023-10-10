@@ -6,4 +6,5 @@ class AuthEvent with _$AuthEvent {
   const factory AuthEvent.onUserUpdated(User? user) = _OnUserUpdated;
   const factory AuthEvent.onAuthCheckRequested() = _OnAuthCheckRequested;
   const factory AuthEvent.onSignedOut() = _OnSignedOut;
+  const factory AuthEvent.onSelectedImage({required String image}) = _OnSelectedImge;
 }
