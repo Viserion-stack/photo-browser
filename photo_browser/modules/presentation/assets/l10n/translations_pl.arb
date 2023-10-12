@@ -28,5 +28,14 @@
     "favoritePhotosText": "Ulubione zdjęcia",
     "galleryText": "Galeria",
     "cameraText": "Aparat",
-    "camerModalTitle": "Edytuj zdjęcie profilowe"
+    "camerModalTitle": "Edytuj zdjęcie profilowe",
+    "incorrectEmailOrPassword": "Nieprawidłowy email lub hasło!",
+    "userNotExist": "Użytkownik nie istnieje ",
+    "userRegistered": "Użytkownik pomyślnie zarejestrowany!",
+    "completePassword": "Uzupełnij  hasło",
+    "passwordInvalidLength": "Hasło musi mieć przynajmniej 8 znaków",
+    "passwordInvalidFormat": "Zbyt słabe hasło",
+    "emailWrongValue": "Niepoprawny adres email",
+    "inputEmpty": "Pole nie moze być puste",
+    "nameInvalidLength": "Zbyt długa nazwa"
 }

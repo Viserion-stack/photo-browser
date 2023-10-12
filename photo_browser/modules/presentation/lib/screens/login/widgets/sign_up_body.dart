@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:presentation/application/app.dart';
+import 'package:presentation/common/input_error_text.dart';
 import 'package:presentation/screens/login/bloc/login_bloc.dart';
 import 'package:presentation/widgets/photo_browser_text_input.dart';
 
@@ -20,38 +21,57 @@ class SignUpBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(
-        right: Insets.large,
-        left: Insets.large,
-      ),
-      child: SingleChildScrollView(
-        physics: const NeverScrollableScrollPhysics(),
-        child: Column(
-          children: [
-            AnimatedContainer(
-              curve: Curves.easeInCubic,
-              duration: const Duration(milliseconds: _durationAnimationSapcer),
-              height: isLoginOpen ? _heightAniamtionSapcer : _heightAniamtionSapcerWhenIsNotLogin,
-              width: double.infinity,
+    return BlocBuilder<LoginBloc, LoginState>(
+      buildWhen: (previous, current) =>
+          previous.nameFormz.value != current.nameFormz.value ||
+          previous.emailFormz.value != current.emailFormz.value ||
+          previous.passwordFormz.value != current.passwordFormz.value,
+      builder: (context, state) {
+        return Padding(
+          padding: const EdgeInsets.only(
+            right: Insets.large,
+            left: Insets.large,
+          ),
+          child: SingleChildScrollView(
+            physics: const NeverScrollableScrollPhysics(),
+            child: Column(
+              children: [
+                AnimatedContainer(
+                  curve: Curves.easeInCubic,
+                  duration: const Duration(milliseconds: _durationAnimationSapcer),
+                  height: isLoginOpen ? _heightAniamtionSapcer : _heightAniamtionSapcerWhenIsNotLogin,
+                  width: double.infinity,
+                ),
+                _SignUpTitle(isLogin: isLoginOpen),
+                if (isLoginOpen == false || !isAnimationEnd) ...[
+                  Gap.xxLarge,
+                  Gap.xxLarge,
+                  PhotoBrowserTextInput(
+                    text: context.strings.nameText,
+                    onChanged: (text) => context.read<LoginBloc>().add(LoginEvent.onNameChanged(text)),
+                    errorText: nameErrorText(context, state.nameFormz),
+                  ),
+                  Gap.medium,
+                  PhotoBrowserTextInput(
+                    text: context.strings.emailText,
+                    onChanged: (text) => context.read<LoginBloc>().add(LoginEvent.onEmailChanged(text)),
+                    errorText: emailErrorText(context, state.emailFormz),
+                  ),
+                  Gap.medium,
+                  PhotoBrowserTextInput(
+                    text: context.strings.passwordText,
+                    onChanged: (text) => context.read<LoginBloc>().add(LoginEvent.onPasswordChanged(text)),
+                    errorText: passwordErrorText(context, state.passwordFormz),
+                    isPasswordInput: true,
+                  ),
+                  Gap.xxLarge,
+                  const _SignUpButton(),
+                ],
+              ],
             ),
-            _SignUpTitle(isLogin: isLoginOpen),
-            if (isLoginOpen == false || !isAnimationEnd) ...[
-              Gap.xxLarge,
-              Gap.xxLarge,
-              PhotoBrowserTextInput(text: context.strings.nameText),
-              Gap.large,
-              PhotoBrowserTextInput(text: context.strings.emailText),
-              Gap.large,
-              PhotoBrowserTextInput(text: context.strings.passwordText),
-              Gap.large,
-              PhotoBrowserTextInput(text: context.strings.confirmPasswordText),
-              Gap.xxLarge,
-              const _SignUpButton(),
-            ],
-          ],
-        ),
-      ),
+          ),
+        );
+      },
     );
   }
 }
@@ -63,6 +83,8 @@ class _SignUpTitle extends StatelessWidget {
   });
 
   final bool isLogin;
+
+  static const _duration = 800;
 
   @override
   Widget build(BuildContext context) {
@@ -76,7 +98,7 @@ class _SignUpTitle extends StatelessWidget {
             style: context.textTheme.bodyMedium!.copyWith(color: context.palette.textOnPrimaryColor),
           ),
           AnimatedDefaultTextStyle(
-            duration: const Duration(milliseconds: 800),
+            duration: const Duration(milliseconds: _duration),
             style: isLogin
                 ? context.textTheme.displaySmall!.copyWith(color: context.palette.textOnPrimaryColor)
                 : context.textTheme.displayLarge!.copyWith(color: context.palette.textOnPrimaryColor),
@@ -98,7 +120,7 @@ class _SignUpButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {},
+      onTap: () => context.read<LoginBloc>().add(const LoginEvent.onRegisterSubmited()),
       child: Container(
         padding: const EdgeInsets.symmetric(vertical: Insets.medium),
         width: double.infinity,

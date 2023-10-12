@@ -1,5 +1,7 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:domain/model/user.dart';
+import 'package:domain/usecase/get_local_users_usecase.dart';
+import 'package:domain/usecase/register_local_user_usecase.dart';
 import 'package:domain/usecase/update_local_user_usecase.dart';
 import 'package:domain/user_provider.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -11,8 +13,14 @@ import 'package:presentation/screens/login/login_argument.dart';
 
 class MockUserProvider extends Mock implements UserProvider {}
 
+class MockGetLocalUsersUsecase extends Mock implements GetLocalUsersUsecase {}
+
+class MockRegisterLocalUserUsecase extends Mock implements RegisterLocalUserUsecase {}
+
 void main() {
   late MockUserProvider mockUserProvider;
+  late MockGetLocalUsersUsecase mockGetLocalUsersUsecase;
+  late MockRegisterLocalUserUsecase mockRegisterLocalUserUsecase;
   late LoginBloc bloc;
 
   const argument = LoginArgument();
@@ -21,9 +29,13 @@ void main() {
   setUp(
     () {
       mockUserProvider = MockUserProvider();
+      mockGetLocalUsersUsecase = MockGetLocalUsersUsecase();
+      mockRegisterLocalUserUsecase = MockRegisterLocalUserUsecase();
       bloc = LoginBloc(
         argument: argument,
         userProvider: mockUserProvider,
+        localUsers: mockGetLocalUsersUsecase,
+        registerLocalUser: mockRegisterLocalUserUsecase,
       );
     },
   );

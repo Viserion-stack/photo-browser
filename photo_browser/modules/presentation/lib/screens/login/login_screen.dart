@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:presentation/application/app.dart';
+import 'package:presentation/common/login_status.dart';
 import 'package:presentation/common/state_type.dart';
 import 'package:presentation/components/snack_bar/snack_bar.dart';
 import 'package:presentation/screens/login/bloc/login_bloc.dart';
 import 'package:presentation/screens/login/widgets/login_body.dart';
 import 'package:presentation/screens/login/widgets/sign_up_body.dart';
+import 'package:presentation/screens/login/widgets/sign_up_drawer.dart';
 
 class LoginScreen extends StatelessWidget {
   static const routeName = '/welcome';
@@ -28,11 +30,48 @@ class LoginScreen extends StatelessWidget {
           },
         ),
         BlocListener<LoginBloc, LoginState>(
+          listenWhen: (previous, current) =>
+              previous.loginStatus != current.loginStatus &&
+              current.loginStatus == LoginStatus.incorrectEmailOrPassword,
+          listener: (context, state) {
+            context.showSnackBarMessage(
+              SnackBarMessage(
+                message: context.strings.incorrectEmailOrPassword,
+                background: context.palette.errorColor,
+              ),
+            );
+          },
+        ),
+        BlocListener<LoginBloc, LoginState>(
+          listenWhen: (previous, current) =>
+              previous.loginStatus != current.loginStatus && current.loginStatus == LoginStatus.userNotExist,
+          listener: (context, state) {
+            context.showSnackBarMessage(
+              SnackBarMessage(
+                message: context.strings.userNotExist,
+                background: context.palette.errorColor,
+              ),
+            );
+          },
+        ),
+        BlocListener<LoginBloc, LoginState>(
           listenWhen: (previous, current) => previous.type != current.type && current.type == StateType.success,
           listener: (context, state) {
             context.showSnackBarMessage(
               SnackBarMessage(
                 message: context.strings.loggedMessage,
+                background: context.palette.accentVariantColor,
+              ),
+            );
+          },
+        ),
+        BlocListener<LoginBloc, LoginState>(
+          listenWhen: (previous, current) =>
+              previous.loginStatus != current.loginStatus && current.loginStatus == LoginStatus.registered,
+          listener: (context, state) {
+            context.showSnackBarMessage(
+              SnackBarMessage(
+                message: context.strings.userRegistered,
                 background: context.palette.accentVariantColor,
               ),
             );
@@ -49,10 +88,13 @@ class LoginScreen extends StatelessWidget {
             body: Stack(
               children: [
                 const _LoginBackground(),
-                LoginBody(isLogin: isLogin),
+                LoginBody(
+                  isLogin: isLogin,
+                  isLoading: state.type == StateType.loading,
+                ),
               ],
             ),
-            bottomNavigationBar: _SignUpDrawer(
+            bottomNavigationBar: SignUpDrawer(
               isLogin: isLogin,
               child: SignUpBody(
                 isLoginOpen: isLogin,
@@ -64,72 +106,6 @@ class LoginScreen extends StatelessWidget {
       ),
     );
   }
-}
-
-class _SignUpDrawer extends StatelessWidget {
-  const _SignUpDrawer({
-    required this.child,
-    required this.isLogin,
-    super.key,
-  });
-
-  final Widget child;
-  final bool isLogin;
-
-  static const _signUpDrawerRadius = Radius.circular(80);
-  static const _signUpDrawerHeight = 100.0;
-  static const _signUpDrawerHeightWhenNotLogin = 600.0;
-  static const _animationDuration = 800;
-
-  @override
-  Widget build(BuildContext context) {
-    return CustomPaint(
-      painter: _OpenPainter(isLogin: isLogin),
-      child: AnimatedContainer(
-        decoration: const BoxDecoration(
-          color: Colors.transparent,
-          borderRadius: BorderRadius.only(
-            topLeft: _signUpDrawerRadius,
-            topRight: _signUpDrawerRadius,
-          ),
-        ),
-        padding: EdgeInsets.zero,
-        curve: Curves.easeInCubic,
-        height: isLogin ? _signUpDrawerHeight : _signUpDrawerHeightWhenNotLogin,
-        width: double.infinity,
-        duration: const Duration(milliseconds: _animationDuration),
-        child: child,
-      ),
-    );
-  }
-}
-
-class _OpenPainter extends CustomPainter {
-  _OpenPainter({required this.isLogin});
-
-  final bool isLogin;
-
-  static const _arcPoint = 0.15;
-
-  @override
-  void paint(Canvas canvas, Size size) {
-    final paint = Paint()
-      ..color = Colors.black
-      ..style = PaintingStyle.fill;
-
-    final Path path = Path();
-    path
-      ..moveTo(0, size.height * _arcPoint)
-      ..quadraticBezierTo(size.width / 2, 0, size.width, size.height * _arcPoint)
-      ..lineTo(size.width, size.height)
-      ..lineTo(0, size.height)
-      ..close();
-
-    canvas.drawPath(path, paint);
-  }
-
-  @override
-  bool shouldRepaint(CustomPainter oldDelegate) => true;
 }
 
 class _LoginBackground extends StatelessWidget {

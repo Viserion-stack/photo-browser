@@ -28,7 +28,7 @@ void main() {
       test(
         'Should return user when no error has occurred',
         () async {
-          final user = User(name: 'name', email: 'name@example.com');
+          final user = User(name: 'name', email: 'name@example.com', password: 'pass');
 
           when(() => mockGetUserRemoteSourceAction.execute()).thenReturn(TaskEither<ErrorDetail, User>.right(user));
 

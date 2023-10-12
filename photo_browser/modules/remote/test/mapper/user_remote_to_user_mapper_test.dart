@@ -19,6 +19,7 @@ void main() {
           const userRemoteModel = UserRemoteModel(
             name: 'name',
             email: 'email',
+            password: 'password',
           );
 
           final user = User.initial();

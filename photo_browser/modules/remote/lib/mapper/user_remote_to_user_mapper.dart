@@ -10,6 +10,7 @@ class UserRemoteToUserMapper implements Mapper<UserRemoteModel, User> {
     return User(
       email: element.email,
       name: element.name,
+      password: element.password,
     );
   }
 }

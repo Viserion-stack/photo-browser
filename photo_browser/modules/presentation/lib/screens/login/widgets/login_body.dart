@@ -3,16 +3,20 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:presentation/application/app_localizations.dart';
 import 'package:presentation/application/dimen.dart';
 import 'package:presentation/application/theme.dart';
+import 'package:presentation/common/input_error_text.dart';
 import 'package:presentation/screens/login/bloc/login_bloc.dart';
 import 'package:presentation/widgets/photo_browser_text_input.dart';
+import 'package:presentation/widgets/standard_loading.dart';
 
 class LoginBody extends StatelessWidget {
   const LoginBody({
     required this.isLogin,
+    required this.isLoading,
     super.key,
   });
 
   final bool isLogin;
+  final bool isLoading;
 
   static const _loginBodyHeight = 350.0;
   static const _loginBodyHeightWhenNotLogin = 80.0;
@@ -49,7 +53,9 @@ class LoginBody extends StatelessWidget {
                 if (isLogin) Gap.large else Gap.small,
                 const _LoginTitle(),
                 const _LoginForm(),
-                const _LoginButton(),
+                _LoginButton(
+                  isLoading: isLoading,
+                ),
               ],
             ),
           ),
@@ -75,7 +81,12 @@ class _LoginTitle extends StatelessWidget {
 }
 
 class _LoginButton extends StatelessWidget {
-  const _LoginButton({super.key});
+  const _LoginButton({
+    required this.isLoading,
+    super.key,
+  });
+
+  final bool isLoading;
 
   static const _loginButtonRadius = 30.0;
 
@@ -91,10 +102,12 @@ class _LoginButton extends StatelessWidget {
           borderRadius: BorderRadius.circular(_loginButtonRadius),
         ),
         child: Center(
-          child: Text(
-            context.strings.loginText,
-            style: context.textTheme.bodyLarge!.copyWith(color: context.palette.accentVariantColor),
-          ),
+          child: isLoading
+              ? const StandardLoading(size: 16)
+              : Text(
+                  context.strings.loginText,
+                  style: context.textTheme.bodyLarge!.copyWith(color: context.palette.accentVariantColor),
+                ),
         ),
       ),
     );
@@ -106,14 +119,28 @@ class _LoginForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Gap.xxxLarge,
-        PhotoBrowserTextInput(text: context.strings.emailText),
-        Gap.large,
-        PhotoBrowserTextInput(text: context.strings.passwordText),
-        Gap.xxLarge,
-      ],
+    return BlocBuilder<LoginBloc, LoginState>(
+      buildWhen: (previous, current) => previous.emailFormz.value != current.emailFormz.value,
+      builder: (context, state) {
+        return Column(
+          children: [
+            Gap.xxxLarge,
+            PhotoBrowserTextInput(
+              text: context.strings.emailText,
+              onChanged: (text) => context.read<LoginBloc>().add(LoginEvent.onEmailChanged(text)),
+              errorText: emailErrorText(context, state.emailFormz),
+            ),
+            Gap.large,
+            PhotoBrowserTextInput(
+              text: context.strings.passwordText,
+              onChanged: (text) => context.read<LoginBloc>().add(LoginEvent.onLoginPasswordChanged(text)),
+              errorText: loginPasswordErrorText(context, state.loginPasswordFormz),
+              isPasswordInput: true,
+            ),
+            Gap.xxLarge,
+          ],
+        );
+      },
     );
   }
 }

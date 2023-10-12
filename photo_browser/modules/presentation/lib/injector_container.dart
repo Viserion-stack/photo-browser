@@ -37,6 +37,8 @@ Future<void> init({
       (argument, _) => LoginBloc(
         argument: argument,
         userProvider: injector.get(),
+        localUsers: injector.get(),
+        registerLocalUser: injector.get(),
       ),
     )
     ..registerFactoryParam<DashboardBloc, DashboardArgument, void>(
@@ -54,6 +56,9 @@ Future<void> init({
     ..registerFactoryParam<DashboardProfileBloc, DashboardProfileArgument, void>(
       (argument, _) => DashboardProfileBloc(
         argument: argument,
+        getLocalUserUsecase: injector.get(),
+        getLocalUsersUsecase: injector.get(),
+        updateLocalUserUsecase: injector.get(),
       ),
     );
 }

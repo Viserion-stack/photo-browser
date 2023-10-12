@@ -35,7 +35,7 @@ class SnackBarContainer extends StatelessWidget {
                 margin: const EdgeInsets.symmetric(horizontal: Insets.xxxLarge, vertical: Insets.large),
                 elevation: 0,
                 behavior: SnackBarBehavior.floating,
-                dismissDirection: DismissDirection.startToEnd,
+                dismissDirection: DismissDirection.up,
               ),
             );
           },

@@ -26,6 +26,7 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   flutter_svg: 1.1.6
+  formz: 0.6.1
   foundation:
     path: ../foundation
   fpdart: 0.4.0

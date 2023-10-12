@@ -27,6 +27,7 @@ void main() {
       final user = User(
         name: 'name',
         email: 'email',
+        password: 'password',
       );
 
       test(

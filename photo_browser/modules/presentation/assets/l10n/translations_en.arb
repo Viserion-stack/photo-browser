@@ -28,5 +28,14 @@
   "favoritePhotosText": "Favorite photos",
   "galleryText": "Gallery",
   "cameraText": "Camera",
-  "camerModalTitle": "Edit profile photo"
+  "camerModalTitle": "Edit profile photo",
+  "incorrectEmailOrPassword": "Incorrect email or password!",
+  "userNotExist": "User doesn't exist",
+  "userRegistered": "User registered successfuly!",
+  "completePassword": "Complete the password",
+  "passwordInvalidLength": "The password must be at least 8 characters long",
+  "passwordInvalidFormat": "Password too weak",
+  "emailWrongValue": "Incorrect email address",
+  "inputEmpty": "The field cannot be empty",
+  "nameInvalidLength": "Name too long"
 }

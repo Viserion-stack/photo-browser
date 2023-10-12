@@ -4,12 +4,15 @@ import 'package:domain/auth_token_provider.dart';
 import 'package:domain/model/user.dart';
 import 'package:domain/store/adapter/secure_storage_adapter.dart';
 import 'package:domain/store/adapter/shared_preferences_adapter.dart';
+import 'package:domain/store/multi_value_store.dart';
 import 'package:domain/store/single_value_store.dart';
 import 'package:domain/usecase/delete_local_user_usecase.dart';
 import 'package:domain/usecase/get_local_user_usecase.dart';
+import 'package:domain/usecase/get_local_users_usecase.dart';
 import 'package:domain/usecase/get_photo_details_usecase.dart';
 import 'package:domain/usecase/get_photo_usecase.dart';
 import 'package:domain/usecase/get_user_usecase.dart';
+import 'package:domain/usecase/register_local_user_usecase.dart';
 import 'package:domain/usecase/search_photos_usecase.dart';
 import 'package:domain/usecase/update_local_user_usecase.dart';
 import 'package:domain/user_provider.dart';
@@ -32,6 +35,13 @@ extension DomainInjector on GetIt {
         () => SingleValueStore<User>(
           adapter: get<SharedPreferencesAdapter>(),
           key: User.loggedInUserStoreKey,
+          fromJson: User.fromJson,
+        ),
+      )
+      ..registerLazySingleton<MultiValueStore<User>>(
+        () => MultiValueStore<User>(
+          adapter: get<SharedPreferencesAdapter>(),
+          key: User.loggedInUsersStoreKey,
           fromJson: User.fromJson,
         ),
       )
@@ -84,6 +94,16 @@ extension DomainInjector on GetIt {
       ..registerFactory<GetPhotoDetailsUsecase>(
         () => GetPhotoDetailsUsecase(
           getPhotoDetailsRemoteSourceAction: get(),
+        ),
+      )
+      ..registerFactory<RegisterLocalUserUsecase>(
+        () => RegisterLocalUserUsecase(
+          userMultiValueStore: get(),
+        ),
+      )
+      ..registerFactory<GetLocalUsersUsecase>(
+        () => GetLocalUsersUsecase(
+          usersMultiValueStore: get(),
         ),
       );
   }

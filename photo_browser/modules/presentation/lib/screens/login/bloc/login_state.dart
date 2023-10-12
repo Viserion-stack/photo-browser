@@ -7,14 +7,27 @@ class LoginState with _$LoginState {
     required LoginArgument argument,
     required bool isLoginOpened,
     required bool isAnimationEnd,
+    required NameFormz nameFormz,
+    required EmailFormz emailFormz,
+    required PasswordFormz passwordFormz,
+    required LoginPasswordFormz loginPasswordFormz,
+    required LoginStatus loginStatus,
   }) = _LoginState;
 
-  factory LoginState.initial({required LoginArgument argument}) {
-    return LoginState(
-      type: StateType.initial,
-      argument: argument,
-      isLoginOpened: true,
-      isAnimationEnd: true,
-    );
-  }
+  const LoginState._();
+
+  factory LoginState.initial({required LoginArgument argument}) => LoginState(
+        type: StateType.initial,
+        argument: argument,
+        isLoginOpened: true,
+        isAnimationEnd: true,
+        nameFormz: const NameFormz.pure(),
+        emailFormz: const EmailFormz.pure(),
+        passwordFormz: const PasswordFormz.pure(),
+        loginPasswordFormz: const LoginPasswordFormz.pure(),
+        loginStatus: LoginStatus.none,
+      );
+
+  bool get isEmailAndPasswordValidated => emailFormz.isValid && loginPasswordFormz.isValid;
+  bool get isRegisterFormValidated => emailFormz.isValid && nameFormz.isValid && passwordFormz.isValid;
 }

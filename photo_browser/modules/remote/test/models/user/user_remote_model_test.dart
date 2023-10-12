@@ -8,6 +8,7 @@ void main() {
       const user = UserRemoteModel(
         name: 'name',
         email: 'email',
+        password: 'password',
       );
 
       final jsonMap = <String, dynamic>{
