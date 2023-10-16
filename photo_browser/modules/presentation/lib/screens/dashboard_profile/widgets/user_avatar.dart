@@ -66,9 +66,9 @@ class _Avatar extends StatelessWidget {
           child: Material(
             elevation: _avatarElevation,
             shape: const CircleBorder(),
-            child: state.userImage.isNotEmpty
+            child: state.user?.userPhotoPath != null
                 ? CircleAvatar(
-                    backgroundImage: FileImage(File(state.userImage)),
+                    backgroundImage: FileImage(File(state.user!.userPhotoPath!)),
                     radius: _avatarRadius,
                   )
                 : const CircleAvatar(

@@ -6,7 +6,9 @@ import 'package:domain/store/adapter/secure_storage_adapter.dart';
 import 'package:domain/store/adapter/shared_preferences_adapter.dart';
 import 'package:domain/store/multi_value_store.dart';
 import 'package:domain/store/single_value_store.dart';
+import 'package:domain/usecase/add_local_users_usecase.dart';
 import 'package:domain/usecase/delete_local_user_usecase.dart';
+import 'package:domain/usecase/delete_user_usecase.dart';
 import 'package:domain/usecase/get_local_user_usecase.dart';
 import 'package:domain/usecase/get_local_users_usecase.dart';
 import 'package:domain/usecase/get_photo_details_usecase.dart';
@@ -104,6 +106,16 @@ extension DomainInjector on GetIt {
       ..registerFactory<GetLocalUsersUsecase>(
         () => GetLocalUsersUsecase(
           usersMultiValueStore: get(),
+        ),
+      )
+      ..registerFactory<DeleteUserUsecase>(
+        () => DeleteUserUsecase(
+          userMultiValueStore: get(),
+        ),
+      )
+      ..registerFactory<AddLocalUsersUsecase>(
+        () => AddLocalUsersUsecase(
+          userMultiValueStore: get(),
         ),
       );
   }

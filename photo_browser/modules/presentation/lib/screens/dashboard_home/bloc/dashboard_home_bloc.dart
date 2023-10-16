@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:domain/model/photo.dart';
 import 'package:domain/model/search_photos_request.dart';
 import 'package:domain/usecase/get_photo_usecase.dart';
-import 'package:domain/usecase/get_user_usecase.dart';
 import 'package:domain/usecase/search_photos_usecase.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -17,11 +16,9 @@ part 'dashboard_home_state.dart';
 class DashboardHomeBloc extends Bloc<DashboardHomeEvent, DashboardHomeState> {
   DashboardHomeBloc({
     required DashboardHomeArgument argument,
-    required GetUserUsecase getUserUsecase,
     required GetPhotoUsecase getPhotoUsecase,
     required SearchPhotosUsecase searchPhotosUsecase,
-  })  : _getUserUsecase = getUserUsecase,
-        _getPhotoUsecase = getPhotoUsecase,
+  })  : _getPhotoUsecase = getPhotoUsecase,
         _searchPhotosUsecase = searchPhotosUsecase,
         super(DashboardHomeState.initial(argument: argument)) {
     on<_OnInitiated>(_onInitiated);
@@ -30,7 +27,6 @@ class DashboardHomeBloc extends Bloc<DashboardHomeEvent, DashboardHomeState> {
     on<_LoadedMorePhotos>(_onLoadedMorePhotos);
   }
 
-  final GetUserUsecase _getUserUsecase;
   final GetPhotoUsecase _getPhotoUsecase;
   final SearchPhotosUsecase _searchPhotosUsecase;
 

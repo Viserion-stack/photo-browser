@@ -1,8 +1,7 @@
 import 'dart:async';
 
+import 'package:domain/model/user.dart';
 import 'package:domain/usecase/get_local_user_usecase.dart';
-import 'package:domain/usecase/get_local_users_usecase.dart';
-import 'package:domain/usecase/update_local_user_usecase.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:presentation/common/state_type.dart';
@@ -18,25 +17,25 @@ class DashboardProfileBloc extends Bloc<DashboardProfileEvent, DashboardProfileS
   DashboardProfileBloc({
     required DashboardProfileArgument argument,
     required GetLocalUserUsecase getLocalUserUsecase,
-    required UpdateLocalUserUsecase updateLocalUserUsecase,
-    required GetLocalUsersUsecase getLocalUsersUsecase,
   })  : _getLocalUserUsecase = getLocalUserUsecase,
-        _getLocalUsersUsecase = getLocalUsersUsecase,
-        _updateLocalUserUsecase = updateLocalUserUsecase,
         super(DashboardProfileState.initial(argument: argument)) {
     on<_OnInitiated>(_onInitiated);
-    on<_OnSelectedProfileImage>(_onSelectedImage);
   }
 
   final GetLocalUserUsecase _getLocalUserUsecase;
-  final GetLocalUsersUsecase _getLocalUsersUsecase;
-  final UpdateLocalUserUsecase _updateLocalUserUsecase;
 
   Future<void> _onInitiated(_OnInitiated event, Emitter<DashboardProfileState> emit) async {
-    emit(state.copyWith(type: StateType.loaded));
-  }
+    final newState = await _getLocalUserUsecase
+        .execute()
+        .match(
+          (_) => state.copyWith(type: StateType.error),
+          (user) => state.copyWith(
+            type: StateType.loaded,
+            user: user,
+          ),
+        )
+        .run();
 
-  Future<void> _onSelectedImage(_OnSelectedProfileImage event, Emitter<DashboardProfileState> emit) async {
-    emit(state.copyWith(profileImagePath: event.imagePath));
+    emit(newState);
   }
 }

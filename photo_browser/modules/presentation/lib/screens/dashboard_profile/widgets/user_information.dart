@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:presentation/application/app.dart';
+import 'package:presentation/screens/dashboard_profile/bloc/dashboard_profile_bloc.dart';
 import 'package:presentation/screens/dashboard_profile/widgets/user_avatar.dart';
 
 class UserInformation extends StatelessWidget {
@@ -32,19 +34,23 @@ class _UserNameAndEmail extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Text(
-          'John',
-          style: context.textTheme.displayLarge!.copyWith(color: context.palette.accentVariantColor),
-        ),
-        Gap.xSmall,
-        Text(
-          'john.doe@gmail.com',
-          style: context.textTheme.bodyMedium!.copyWith(color: context.palette.accentVariantColor),
-        ),
-      ],
+    return BlocBuilder<DashboardProfileBloc, DashboardProfileState>(
+      builder: (context, state) {
+        return Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              state.user.name,
+              style: context.textTheme.displayLarge!.copyWith(color: context.palette.accentVariantColor),
+            ),
+            Gap.xSmall,
+            Text(
+              state.user.email,
+              style: context.textTheme.bodyMedium!.copyWith(color: context.palette.accentVariantColor),
+            ),
+          ],
+        );
+      },
     );
   }
 }

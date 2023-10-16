@@ -4,6 +4,8 @@ import 'dart:async';
 
 import 'package:bloc_test/bloc_test.dart';
 import 'package:domain/model/user.dart';
+import 'package:domain/usecase/register_local_user_usecase.dart';
+import 'package:domain/usecase/update_local_user_usecase.dart';
 import 'package:domain/user_provider.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
@@ -12,12 +14,18 @@ import 'package:presentation/components/auth/bloc/auth_bloc.dart';
 
 class MockUserProvider extends Mock implements UserProvider {}
 
+class MockRegisterLocalUserUsecase extends Mock implements RegisterLocalUserUsecase {}
+
+class MockUpdateLocalUserUsecase extends Mock implements UpdateLocalUserUsecase {}
+
 class MockUserStream extends Mock implements Stream<User?> {}
 
 class MockUserStreamSubscription extends Mock implements StreamSubscription<User?> {}
 
 void main() {
   late MockUserProvider mockUserProvider;
+  late MockRegisterLocalUserUsecase mockRegisterLocalUserUsecase;
+  late MockUpdateLocalUserUsecase mockUpdateLocalUserUsecase;
   late MockUserStream mockUserStream;
   late MockUserStreamSubscription mockUserStreamSubscription;
   late AuthBloc bloc;
@@ -27,10 +35,14 @@ void main() {
   setUp(
     () {
       mockUserProvider = MockUserProvider();
+      mockRegisterLocalUserUsecase = MockRegisterLocalUserUsecase();
+      mockUpdateLocalUserUsecase = MockUpdateLocalUserUsecase();
       mockUserStream = MockUserStream();
       mockUserStreamSubscription = MockUserStreamSubscription();
       bloc = AuthBloc(
         userProvider: mockUserProvider,
+        updateLocalUserUsecase: mockUpdateLocalUserUsecase,
+        updateUserInStore: mockRegisterLocalUserUsecase,
       );
     },
   );

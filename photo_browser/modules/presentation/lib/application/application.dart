@@ -9,6 +9,7 @@ import 'package:presentation/components/snack_bar/snack_bar_container_widget.dar
 import 'package:presentation/injector_container.dart';
 import 'package:presentation/l10n/translations.dart';
 import 'package:presentation/router/app_route_factory.dart';
+import 'package:presentation/screens/dashboard_profile/bloc/dashboard_profile_bloc.dart';
 
 class Application extends StatelessWidget {
   Application({
@@ -35,7 +36,10 @@ class Application extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => SnackBarBloc(),
-        )
+        ),
+        BlocProvider(
+          create: (context) => injector<DashboardProfileBloc>(),
+        ),
       ],
       child: AdaptiveTheme(
         light: appTheme.theme(LightPalette()),

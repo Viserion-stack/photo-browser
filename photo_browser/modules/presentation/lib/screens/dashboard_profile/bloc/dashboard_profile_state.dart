@@ -6,6 +6,7 @@ class DashboardProfileState with _$DashboardProfileState {
     required StateType type,
     required DashboardProfileArgument argument,
     required String profileImagePath,
+    required User user,
   }) = _DashboardProfileState;
 
   factory DashboardProfileState.initial({required DashboardProfileArgument argument}) {
@@ -13,6 +14,7 @@ class DashboardProfileState with _$DashboardProfileState {
       type: StateType.loading,
       profileImagePath: '',
       argument: argument,
+      user: User.initial(),
     );
   }
 }

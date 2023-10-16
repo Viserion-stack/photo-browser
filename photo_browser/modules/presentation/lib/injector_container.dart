@@ -31,6 +31,10 @@ Future<void> init({
     ..registerLazySingleton<AuthBloc>(
       () => AuthBloc(
         userProvider: injector.get(),
+        updateLocalUserUsecase: injector.get(),
+        getLocalUsersUsecase: injector.get(),
+        deleteUserUsecase: injector.get(),
+        addLocalUsersUsecase: injector.get(),
       ),
     )
     ..registerFactoryParam<LoginBloc, LoginArgument, void>(
@@ -47,18 +51,13 @@ Future<void> init({
       ),
     )
     ..registerFactoryParam<DashboardHomeBloc, DashboardHomeArgument, void>(
-      (argument, _) => DashboardHomeBloc(
-          argument: argument,
-          getUserUsecase: injector.get(),
-          getPhotoUsecase: injector.get(),
-          searchPhotosUsecase: injector.get()),
+      (argument, _) =>
+          DashboardHomeBloc(argument: argument, getPhotoUsecase: injector.get(), searchPhotosUsecase: injector.get()),
     )
     ..registerFactoryParam<DashboardProfileBloc, DashboardProfileArgument, void>(
       (argument, _) => DashboardProfileBloc(
         argument: argument,
         getLocalUserUsecase: injector.get(),
-        getLocalUsersUsecase: injector.get(),
-        updateLocalUserUsecase: injector.get(),
       ),
     );
 }
